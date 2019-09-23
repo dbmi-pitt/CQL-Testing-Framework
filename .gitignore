@@ -3,3 +3,6 @@
 /.vscode
 /node_modules
 yarn-error.log
+**/.idea/
+**/CQL-Testing-Framework.iml
+**/package-lock.json

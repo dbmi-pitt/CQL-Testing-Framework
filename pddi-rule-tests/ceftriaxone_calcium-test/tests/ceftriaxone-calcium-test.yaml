@@ -1,0 +1,40 @@
+---
+name: First test of ceftriaxone and calcium cql
+
+data:
+-
+  resourceType: Patient
+  name: Fuller Jackson
+  gender: male
+  birthDate: 1954-02-16
+-
+  resourceType: MedicationStatement
+  code: RXNORM#1665005 Ceftriaxone 500 MG Injection
+  effectiveDateTime: 2019-07-30
+-
+  resourceType: MedicationStatement
+  code: RXNORM#1010723 Calcium Gluconate 230 MG/ML Injectable
+  effectiveDateTime: 2019-08-01
+
+results:
+  Summary:
+    Patient:
+      Name: Fuller Jackson
+      Gender: male
+      Age: 65
+    ConcomitantDrugExposure: true
+    HistoricalTreatments:
+      CeftriaxoneMedications:
+      -
+        Type: Statement
+        Name: Ceftriaxone 500 MG Injection
+        Start: '2019-07-30T00:00:00.000+00:00'
+        End: null
+        Status: active
+      CalciumMedications:
+      -
+        Type: Statement
+        Name: Calcium Gluconate 230 MG/ML Injectable
+        Start: '2019-08-01T00:00:00.000+00:00'
+        End: null
+        Status: active
