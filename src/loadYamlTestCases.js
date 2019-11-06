@@ -325,7 +325,7 @@ function handleMedicationStatement(d, p, fhirVersion) {
     [wasNotTakenKey]: wasNotTakenValue,
     effectiveDateTime: d.effectiveDateTime ? getDateTime(d.effectiveDateTime) : undefined,
     effectivePeriod: d.effectivePeriod ? getPeriod(d.effectivePeriod) : undefined,
-    medicationCodeableConcept: d.code ? getCodeableConcept(d.code) : undefined,
+    medicationCodeableConcept: getCodeableConcept(d.code),
     dosage: d.dosage ? d.dosage : undefined
   };
 }
