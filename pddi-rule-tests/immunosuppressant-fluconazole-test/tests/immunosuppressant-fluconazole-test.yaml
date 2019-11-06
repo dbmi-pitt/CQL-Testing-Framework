@@ -1,0 +1,40 @@
+---
+name: First test of immunosuppressant and fluconazole cql
+
+data:
+-
+  resourceType: Patient
+  name: Fuller Jackson
+  gender: male
+  birthDate: 1954-02-16
+-
+  resourceType: MedicationStatement
+  code: RXNORM#1093174 Cyclosporine 0.002 MG/MG Ophthalmic
+  effectiveDateTime: 2019-08-01
+-
+  resourceType: MedicationStatement
+  code: RXNORM#197698 Fluconazole 100 MG Oral Tablet
+  effectiveDateTime: 2019-07-30
+
+results:
+  Summary:
+    Patient:
+      Name: Fuller Jackson
+      Gender: male
+      Age: 65
+    ConcomitantDrugExposure: true
+    HistoricalTreatments:
+      FluconazolesMedications:
+      -
+        Type: Statement
+        Name: Fluconazole 100 MG Oral Tablet
+        Start: '2019-07-30T00:00:00.000+00:00'
+        End: null
+        Status: active
+      ImmunosuppressantMedications:
+      -
+        Type: Statement
+        Name: Cyclosporine 0.002 MG/MG Ophthalmic
+        Start: '2019-08-01T00:00:00.000+00:00'
+        End: null
+        Status: active
