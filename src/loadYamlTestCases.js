@@ -186,6 +186,7 @@ function handleResource(d, p, fhirVersion, testName) {
   case 'MedicationOrder': return handleMedicationOrder(d, p, fhirVersion);
   case 'MedicationRequest': return handleMedicationRequest(d, p, fhirVersion);
   case 'MedicationStatement': return handleMedicationStatement(d, p, fhirVersion);
+  case 'Medication' : return handleMedication(d, p, fhirVersion);
   case 'Observation': return handleObservation(d, p, fhirVersion);
   case 'Procedure': return handleProcedure(d, p, fhirVersion);
   case 'ProcedureRequest': return handleProcedureRequest(d, p, fhirVersion);
@@ -324,8 +325,22 @@ function handleMedicationStatement(d, p, fhirVersion) {
     [wasNotTakenKey]: wasNotTakenValue,
     effectiveDateTime: d.effectiveDateTime ? getDateTime(d.effectiveDateTime) : undefined,
     effectivePeriod: d.effectivePeriod ? getPeriod(d.effectivePeriod) : undefined,
-    medicationCodeableConcept: getCodeableConcept(d.code)
+    medicationCodeableConcept: getCodeableConcept(d.code),
+    dosage: d.dosage ? d.dosage : undefined
   };
+}
+
+function handleMedication(d, p, fhirVersion) {
+  return {
+    resourceType: 'Medication',
+    id: getId(d.id),
+    code: getCodeableConcept(d.code),
+    status: getString(d.status, 'active'),
+    isBrand: getBoolean(d.isBrand, false),
+    isOverThecounter: getBoolean(d.isOverThecounter, false),
+    form: d.form ? d.form : undefined,
+    ingredient: getIngredient(d.ingredient)
+  }
 }
 
 function handleObservation(d, p, fhirVersion) {
@@ -562,6 +577,20 @@ function getCodeableConcept(code) {
   }
 }
 
+/*function getMedicationReference(med) {
+  if (med) {
+    return {
+      id: getId(med.id),
+      code: getCodeableConcept(med.code),
+      status: getString(med.status, 'active'),
+      isBrand: getBoolean(med.isBrand, false),
+      isOverThecounter: getBoolean(med.isOverThecounter, false),
+      form: med.form ? med.form : undefined,
+      ingredient: med.ingredient ? med.ingredient : undefined
+    }
+  }
+}*/
+
 function getCoding(code) {
   if (code) {
     const matches = /^((\S+)?\s*#\s*([^#\s]+))?\s*(.*)?$/.exec(code);
@@ -645,6 +674,22 @@ function getExtension(extension) {
     });
   }
   return extensionArray;
+}
+
+function getIngredient(ingredient) {
+  let ingredientArray = [];
+  if (ingredient != null) {
+    if (!Array.isArray(ingredient)) {
+      ingredient = [ingredient];
+    }
+    ingredient.forEach( ing => {
+      ingredientArray.push({
+        'itemCodeableConcept': getCodeableConcept(ing.code),
+        'amount': ing.amount ? ing.amount : undefined
+      });
+    });
+  }
+  return ingredientArray;
 }
 
 module.exports = loadYamlTestCases;
