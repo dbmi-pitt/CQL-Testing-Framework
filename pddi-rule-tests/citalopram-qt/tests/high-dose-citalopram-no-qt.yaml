@@ -43,17 +43,19 @@ results:
       Gender: male
       Age: 65
     HistoricalTreatments:
+      BasicConcomitant: false
       Citaloprams:
       -
-        Type: Statement
         Name: Citalopram 10 MG Oral Tablet
         Start: '2019-07-30T00:00:00.000+00:00'
         End: null
         Status: active
-      QTProlongingAgents: 
-      -
-        Type: Statement
-        Name: Ondansetron 4 MG Oral Tablet
-        Start: '2019-08-01T00:00:00.000+00:00'
-        End: null
-        Status: active
+        Ingredient: Citalopram
+        Amount: 10
+        Dosage: 8
+        DailyDosage: 80
+      HighCitalopramDose: [true]
+      QTProlongingAgents: []
+    Alert:
+      Rationale: Increased risk of prolonged QTc possible
+      Recommendation: Minimize risk and Monitor ECG

@@ -139,7 +139,7 @@ define "InPopulation":
 
 define "Recommendation":
   if "Citalopram < 60 mg/day" then 'No special precaution'
-  else if "Citalopram >= 60 mg/day - QT Prolonging Agents" then 'Use only if benefit outweighs risk and monitor patient ECG '
+  else if "Citalopram >= 60 mg/day - QT Prolonging Agents" then 'Use only if benefit outweighs risk and monitor patient ECG'
   else if "Citalopram >= 60 mg/day - No QT Prolonging Agents" then 'Minimize risk and Monitor ECG'
   else null
 

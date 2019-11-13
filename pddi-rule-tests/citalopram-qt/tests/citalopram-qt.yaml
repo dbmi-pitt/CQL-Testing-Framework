@@ -51,13 +51,18 @@ results:
       Gender: male
       Age: 65
     HistoricalTreatments:
+      BasicConcomitant: true
       Citaloprams:
       -
-        Type: Statement
         Name: Citalopram 10 MG Oral Tablet
         Start: '2019-07-30T00:00:00.000+00:00'
         End: null
         Status: active
+        Ingredient: Citalopram
+        Amount: 10
+        Dosage: 1
+        DailyDosage: 10
+      HighCitalopramDose: [false]
       QTProlongingAgents: 
       -
         Type: Statement
@@ -65,3 +70,6 @@ results:
         Start: '2019-08-01T00:00:00.000+00:00'
         End: null
         Status: active
+    Alert:
+      Rationale: null
+      Recommendation: No special precaution

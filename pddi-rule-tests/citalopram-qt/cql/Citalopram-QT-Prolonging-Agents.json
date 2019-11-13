@@ -1,27 +1,27 @@
 {
    "library" : {
       "annotation" : [ {
-         "startLine" : 136,
+         "startLine" : 119,
          "startChar" : 7,
-         "endLine" : 136,
+         "endLine" : 119,
          "endChar" : 38,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
-         "startLine" : 143,
+         "startLine" : 126,
          "startChar" : 7,
-         "endLine" : 143,
+         "endLine" : 126,
          "endChar" : 39,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
-         "startLine" : 151,
+         "startLine" : 134,
          "startChar" : 7,
-         "endLine" : 151,
+         "endLine" : 134,
          "endChar" : 39,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -55,17 +55,6 @@
             "localIdentifier" : "C3F",
             "path" : "CDS_Connect_Commons_for_FHIRv300",
             "version" : "1.1.0"
-         } ]
-      },
-      "parameters" : {
-         "def" : [ {
-            "name" : "Dose of Citalopram",
-            "accessLevel" : "Public",
-            "default" : {
-               "value" : 60.0,
-               "unit" : "mg/d",
-               "type" : "Quantity"
-            }
          } ]
       },
       "codeSystems" : {
@@ -1307,7 +1296,7 @@
                   },
                   "then" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "Use only if benefit outweighs risk and monitor patient ECG ",
+                     "value" : "Use only if benefit outweighs risk and monitor patient ECG",
                      "type" : "Literal"
                   },
                   "else" : {
