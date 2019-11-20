@@ -1,5 +1,5 @@
 {
-  "name": "pddi-warfarin-nsaid-test1",
+  "name": "pddi-citalopram-qt",
   "version": "1.0.0",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec --recursive"
