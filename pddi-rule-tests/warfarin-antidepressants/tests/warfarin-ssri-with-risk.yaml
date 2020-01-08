@@ -23,6 +23,14 @@ data:
   resourceType: MedicationStatement
   code: RXNORM#197805 Ibuprofen 400 MG Oral Capsule
   effectiveDateTime: 2019-07-30T00:00:00.000+00:00 
+-
+  resourceType: MedicationStatement
+  code: RXNORM#104474 Aspirin 75 MG Oral Tablet
+  effectiveDateTime: 2019-07-15T00:00:00.000+00:00 
+-
+  resourceType: MedicationStatement
+  code: RXNORM#313096 Spironolactone 25 MG Oral Tablet
+  effectiveDateTime: 2019-06-30T00:00:00.000+00:00 
 
 results:
   Summary:
@@ -61,6 +69,18 @@ results:
         Type: Statement
         Name: Ibuprofen 400 MG Oral Capsule
         Start: '2019-07-30T00:00:00.000+00:00'
+        End: null
+        Status: active
+      -
+        Type: Statement
+        Name: Aspirin 75 MG Oral Tablet
+        Start: '2019-07-15T00:00:00.000+00:00'
+        End: null
+        Status: active
+      -
+        Type: Statement
+        Name: Spironolactone 25 MG Oral Tablet
+        Start: '2019-06-30T00:00:00.000+00:00'
         End: null
         Status: active
     Alert:

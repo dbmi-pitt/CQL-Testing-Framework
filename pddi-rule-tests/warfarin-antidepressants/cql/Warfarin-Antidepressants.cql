@@ -148,7 +148,7 @@ define "Report NSAIDs":
   sort by Start desc, End desc
 
 define "Aspirins":
-  C3F.MedicationStatementLookBack([MedicationStatement: "NSAIDs VS"], 180 days)
+  C3F.MedicationStatementLookBack([MedicationStatement: "Aspirins VS"], 180 days)
 
 define "Report Aspirins":
   "Aspirins" S
@@ -162,7 +162,7 @@ define "Report Aspirins":
   sort by Start desc, End desc
 
 define "Systemic Corticosteroids":
-  C3F.MedicationStatementLookBack([MedicationStatement: "NSAIDs VS"], 180 days)
+  C3F.MedicationStatementLookBack([MedicationStatement: "Systemic Corticosteroids VS"], 180 days)
 
 define "Report Systemic Corticosteroids":
   "Systemic Corticosteroids" S
@@ -176,7 +176,7 @@ define "Report Systemic Corticosteroids":
   sort by Start desc, End desc
 
 define "Aldosterone Antagonists":
-  C3F.MedicationStatementLookBack([MedicationStatement: "NSAIDs VS"], 180 days)
+  C3F.MedicationStatementLookBack([MedicationStatement: "Aldosterone Antagonists VS"], 180 days)
 
 define "Report Aldosterone Antagonists":
   "Aldosterone Antagonists" S
@@ -190,7 +190,7 @@ define "Report Aldosterone Antagonists":
   sort by Start desc, End desc
 
 define "Antiplatelet Medications":
-  C3F.MedicationStatementLookBack([MedicationStatement: "NSAIDs VS"], 180 days)
+  C3F.MedicationStatementLookBack([MedicationStatement: "Antiplatelet Medications VS"], 180 days)
 
 define "Report Antiplatelet Medications":
   "Antiplatelet Medications" S

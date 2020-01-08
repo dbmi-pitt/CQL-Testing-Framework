@@ -1163,7 +1163,7 @@
                   "codeProperty" : "medication",
                   "type" : "Retrieve",
                   "codes" : {
-                     "name" : "NSAIDs VS",
+                     "name" : "Aspirins VS",
                      "type" : "ValueSetRef"
                   }
                }, {
@@ -1290,7 +1290,7 @@
                   "codeProperty" : "medication",
                   "type" : "Retrieve",
                   "codes" : {
-                     "name" : "NSAIDs VS",
+                     "name" : "Systemic Corticosteroids VS",
                      "type" : "ValueSetRef"
                   }
                }, {
@@ -1417,7 +1417,7 @@
                   "codeProperty" : "medication",
                   "type" : "Retrieve",
                   "codes" : {
-                     "name" : "NSAIDs VS",
+                     "name" : "Aldosterone Antagonists VS",
                      "type" : "ValueSetRef"
                   }
                }, {
@@ -1544,7 +1544,7 @@
                   "codeProperty" : "medication",
                   "type" : "Retrieve",
                   "codes" : {
-                     "name" : "NSAIDs VS",
+                     "name" : "Antiplatelet Medications VS",
                      "type" : "ValueSetRef"
                   }
                }, {
