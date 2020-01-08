@@ -6,3 +6,5 @@ yarn-error.log
 **/.idea/
 **/CQL-Testing-Framework.iml
 **/package-lock.json
+**/node_modules/
+/pddi-rule-tests/old/

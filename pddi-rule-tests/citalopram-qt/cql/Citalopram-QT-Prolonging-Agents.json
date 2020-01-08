@@ -1,27 +1,27 @@
 {
    "library" : {
       "annotation" : [ {
-         "startLine" : 93,
+         "startLine" : 92,
          "startChar" : 7,
-         "endLine" : 93,
+         "endLine" : 92,
          "endChar" : 38,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
-         "startLine" : 100,
+         "startLine" : 99,
          "startChar" : 7,
-         "endLine" : 100,
+         "endLine" : 99,
          "endChar" : 39,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
-         "startLine" : 108,
+         "startLine" : 107,
          "startChar" : 7,
-         "endLine" : 108,
+         "endLine" : 107,
          "endChar" : 39,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
