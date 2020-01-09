@@ -2331,7 +2331,7 @@
                            "type" : "ExpressionRef"
                         }
                      }, {
-                        "name" : "Antidepressants",
+                        "name" : "SSRIsSNRIs",
                         "value" : {
                            "name" : "Report SSRIs and SNRIs",
                            "type" : "ExpressionRef"

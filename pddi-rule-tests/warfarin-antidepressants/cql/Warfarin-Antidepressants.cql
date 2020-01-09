@@ -11,7 +11,6 @@ include ReusableFunctions_FHIRv300 version '1.0.0' called RF
 codesystem "RXNORM": 'http://www.nlm.nih.gov/research/umls/rxnorm'
 codesystem "ICD9D": 'http://hl7.org/fhir/sid/icd-9-cm/diagnosis'
 
-
 valueset "Warfarins VS": '2.16.840.1.113762.1.4.1213.8'
 valueset "Mirtazapines VS": '2.16.840.1.113762.1.4.1213.32'
 valueset "Tricyclics VS": '2.16.840.1.113762.1.4.1213.31'
@@ -282,7 +281,7 @@ define Summary: {
   },
   HistoricalTreatments: {
     Warfarins: "Report Warfarins",
-    Antidepressants: "Report SSRIs and SNRIs",
+    SSRIsSNRIs: "Report SSRIs and SNRIs",
     Mirtazapines: "Report Mirtazapines",
     Tricyclics: "Report Tricyclics",
     Bupropions: "Report Bupropions"
