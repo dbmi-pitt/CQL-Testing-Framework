@@ -41,7 +41,7 @@ results:
         End: null
         Status: active
       Bupropions: []
-    PertinentMedicalHistory:
+    RiskFactorsForMajorBleeding:
       GastrointestinalBleeding: []
       Is65orOlder: true
       MedicationBleedingRisks: []

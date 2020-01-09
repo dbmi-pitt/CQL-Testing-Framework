@@ -56,7 +56,7 @@ results:
       Mirtazapines: []
       Tricyclics: []
       Bupropions: []
-    PertinentMedicalHistory:
+    RiskFactorsForMajorBleeding:
       GastrointestinalBleeding: 
       -
         Name: Acute gastric ulcer with hemorrhage and perforation

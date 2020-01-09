@@ -40,7 +40,7 @@ results:
       Mirtazapines: []
       Tricyclics: []
       Bupropions: []
-    PertinentMedicalHistory:
+    RiskFactorsForMajorBleeding:
       GastrointestinalBleeding: []
       Is65orOlder: false
       MedicationBleedingRisks: []

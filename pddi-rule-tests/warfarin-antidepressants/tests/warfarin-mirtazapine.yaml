@@ -41,7 +41,7 @@ results:
         Status: active
       Tricyclics: []
       Bupropions: []
-    PertinentMedicalHistory:
+    RiskFactorsForMajorBleeding:
       GastrointestinalBleeding: []
       Is65orOlder: true
       MedicationBleedingRisks: []

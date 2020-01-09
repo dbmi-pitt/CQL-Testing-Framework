@@ -287,7 +287,7 @@ define Summary: {
     Tricyclics: "Report Tricyclics",
     Bupropions: "Report Bupropions"
   },
-  PertinentMedicalHistory: {
+  RiskFactorsForMajorBleeding: {
     GastrointestinalBleeding: "Report GI Bleeding",
     Is65orOlder: "Is65orOlder",
     MedicationBleedingRisks: "Report Medication Risk Factors for Bleeding"
