@@ -25,8 +25,6 @@ valueset "Aspirins VS": '2.16.840.1.113762.1.4.1213.29'
 
 valueset "History of Gastrointestinal Bleeds VS": '2.16.840.1.113762.1.4.1213.53'
 
-// parameter "One or more risk factors for major bleeding" default true
-
 context Patient
 
 // RISK CONSIDERATIONS
