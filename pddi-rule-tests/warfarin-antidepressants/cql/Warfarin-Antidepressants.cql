@@ -1,4 +1,5 @@
 library "Warfarin-Antidepressants" version '1.0'
+// ./cql-to-elm/build/install/cql-to-elm/bin/cql-to-elm  --format=JSON --input /Users/erc53/Github/CQL-Testing-Framework/pddi-rule-tests/warfarin-antidepressants/cql/Warfarin-Antidepressants.cql   --output /Users/erc53/Github/CQL-Testing-Framework/pddi-rule-tests/warfarin-antidepressants/cql/
 
 using FHIR version '3.0.0'
 
@@ -254,18 +255,19 @@ define "InPopulation":
    "MeetsInclusionCriteria" 
 
 define "Recommendation":
-  if "Warfarin - Mirtazapine" then 'Assess risk and take action if necessary'
-  else if "Warfarin - Tricyclics/Bupropion" then 'No special precautions'
-  else if "Warfarin - SSRIs and SNRIs" and "Patient has one or more risk factors for major bleeding" then 'Use only if benefit outweighs risk'
+  if "Warfarin - SSRIs and SNRIs" and "Patient has one or more risk factors for major bleeding" then 'Use only if benefit outweighs risk'
   else if "Warfarin - SSRIs and SNRIs" and "Patient has no risk factors for major bleeding" then 'Assess risk and take action if necessary'
+  else if "Warfarin - Mirtazapine" then 'Assess risk and take action if necessary'
+  else if "Warfarin - Tricyclics/Bupropion" then 'No special precautions'
   else null
 
 define "Rationale":
-  if "Warfarin - Mirtazapine" then 'Increased GI and non-GI bleeding risk is possible'
-  else if "Warfarin - Tricyclics/Bupropion" then 'Increased bleeding risk unlikely'
-  else if "Warfarin - SSRIs and SNRIs" and "Patient has one or more risk factors for major bleeding" then 'Increased GI and non-GI bleeding risk is likely'
+  if "Warfarin - SSRIs and SNRIs" and "Patient has one or more risk factors for major bleeding" then 'Increased GI and non-GI bleeding risk is likely'
   else if "Warfarin - SSRIs and SNRIs" and "Patient has no risk factors for major bleeding" then 'Increased GI and non-GI bleeding risk is possible'
+  else if "Warfarin - Mirtazapine" then 'Increased GI and non-GI bleeding risk is possible'
+  else if "Warfarin - Tricyclics/Bupropion" then 'Increased bleeding risk unlikely'
   else null
+
 define "Errors":
   if null then
     {''}

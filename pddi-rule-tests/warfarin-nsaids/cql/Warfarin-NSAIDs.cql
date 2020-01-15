@@ -1,4 +1,5 @@
 library "Warfarin-NSAIDs" version '1'
+// ./cql-to-elm/build/install/cql-to-elm/bin/cql-to-elm  --format=JSON --input /Users/erc53/Github/CQL-Testing-Framework/pddi-rule-tests/warfarin-nsaids/cql/Warfarin-NSAIDs.cql   --output /Users/erc53/Github/CQL-Testing-Framework/pddi-rule-tests/warfarin-nsaids/cql/
 
 using FHIR version '3.0.0'
 

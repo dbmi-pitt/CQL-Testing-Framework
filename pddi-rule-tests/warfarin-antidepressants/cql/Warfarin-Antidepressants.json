@@ -1947,13 +1947,19 @@
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "operand" : {
-                     "name" : "Warfarin - Mirtazapine",
-                     "type" : "ExpressionRef"
+                     "type" : "And",
+                     "operand" : [ {
+                        "name" : "Warfarin - SSRIs and SNRIs",
+                        "type" : "ExpressionRef"
+                     }, {
+                        "name" : "Patient has one or more risk factors for major bleeding",
+                        "type" : "ExpressionRef"
+                     } ]
                   }
                },
                "then" : {
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Assess risk and take action if necessary",
+                  "value" : "Use only if benefit outweighs risk",
                   "type" : "Literal"
                },
                "else" : {
@@ -1962,13 +1968,19 @@
                      "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "As",
                      "operand" : {
-                        "name" : "Warfarin - Tricyclics/Bupropion",
-                        "type" : "ExpressionRef"
+                        "type" : "And",
+                        "operand" : [ {
+                           "name" : "Warfarin - SSRIs and SNRIs",
+                           "type" : "ExpressionRef"
+                        }, {
+                           "name" : "Patient has no risk factors for major bleeding",
+                           "type" : "ExpressionRef"
+                        } ]
                      }
                   },
                   "then" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "No special precautions",
+                     "value" : "Assess risk and take action if necessary",
                      "type" : "Literal"
                   },
                   "else" : {
@@ -1977,19 +1989,13 @@
                         "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "As",
                         "operand" : {
-                           "type" : "And",
-                           "operand" : [ {
-                              "name" : "Warfarin - SSRIs and SNRIs",
-                              "type" : "ExpressionRef"
-                           }, {
-                              "name" : "Patient has one or more risk factors for major bleeding",
-                              "type" : "ExpressionRef"
-                           } ]
+                           "name" : "Warfarin - Mirtazapine",
+                           "type" : "ExpressionRef"
                         }
                      },
                      "then" : {
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Use only if benefit outweighs risk",
+                        "value" : "Assess risk and take action if necessary",
                         "type" : "Literal"
                      },
                      "else" : {
@@ -1998,19 +2004,13 @@
                            "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "As",
                            "operand" : {
-                              "type" : "And",
-                              "operand" : [ {
-                                 "name" : "Warfarin - SSRIs and SNRIs",
-                                 "type" : "ExpressionRef"
-                              }, {
-                                 "name" : "Patient has no risk factors for major bleeding",
-                                 "type" : "ExpressionRef"
-                              } ]
+                              "name" : "Warfarin - Tricyclics/Bupropion",
+                              "type" : "ExpressionRef"
                            }
                         },
                         "then" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Assess risk and take action if necessary",
+                           "value" : "No special precautions",
                            "type" : "Literal"
                         },
                         "else" : {
@@ -2034,13 +2034,19 @@
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "operand" : {
-                     "name" : "Warfarin - Mirtazapine",
-                     "type" : "ExpressionRef"
+                     "type" : "And",
+                     "operand" : [ {
+                        "name" : "Warfarin - SSRIs and SNRIs",
+                        "type" : "ExpressionRef"
+                     }, {
+                        "name" : "Patient has one or more risk factors for major bleeding",
+                        "type" : "ExpressionRef"
+                     } ]
                   }
                },
                "then" : {
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Increased GI and non-GI bleeding risk is possible",
+                  "value" : "Increased GI and non-GI bleeding risk is likely",
                   "type" : "Literal"
                },
                "else" : {
@@ -2049,13 +2055,19 @@
                      "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "As",
                      "operand" : {
-                        "name" : "Warfarin - Tricyclics/Bupropion",
-                        "type" : "ExpressionRef"
+                        "type" : "And",
+                        "operand" : [ {
+                           "name" : "Warfarin - SSRIs and SNRIs",
+                           "type" : "ExpressionRef"
+                        }, {
+                           "name" : "Patient has no risk factors for major bleeding",
+                           "type" : "ExpressionRef"
+                        } ]
                      }
                   },
                   "then" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "Increased bleeding risk unlikely",
+                     "value" : "Increased GI and non-GI bleeding risk is possible",
                      "type" : "Literal"
                   },
                   "else" : {
@@ -2064,19 +2076,13 @@
                         "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "As",
                         "operand" : {
-                           "type" : "And",
-                           "operand" : [ {
-                              "name" : "Warfarin - SSRIs and SNRIs",
-                              "type" : "ExpressionRef"
-                           }, {
-                              "name" : "Patient has one or more risk factors for major bleeding",
-                              "type" : "ExpressionRef"
-                           } ]
+                           "name" : "Warfarin - Mirtazapine",
+                           "type" : "ExpressionRef"
                         }
                      },
                      "then" : {
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Increased GI and non-GI bleeding risk is likely",
+                        "value" : "Increased GI and non-GI bleeding risk is possible",
                         "type" : "Literal"
                      },
                      "else" : {
@@ -2085,19 +2091,13 @@
                            "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "As",
                            "operand" : {
-                              "type" : "And",
-                              "operand" : [ {
-                                 "name" : "Warfarin - SSRIs and SNRIs",
-                                 "type" : "ExpressionRef"
-                              }, {
-                                 "name" : "Patient has no risk factors for major bleeding",
-                                 "type" : "ExpressionRef"
-                              } ]
+                              "name" : "Warfarin - Tricyclics/Bupropion",
+                              "type" : "ExpressionRef"
                            }
                         },
                         "then" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Increased GI and non-GI bleeding risk is possible",
+                           "value" : "Increased bleeding risk unlikely",
                            "type" : "Literal"
                         },
                         "else" : {

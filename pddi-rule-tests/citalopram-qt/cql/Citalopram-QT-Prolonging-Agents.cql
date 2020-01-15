@@ -1,4 +1,5 @@
 library "Citalopram-QT-Prolonging-Agents" version '1.0'
+// ./cql-to-elm/build/install/cql-to-elm/bin/cql-to-elm  --format=JSON --input /Users/erc53/Github/CQL-Testing-Framework/pddi-rule-tests/citalopram-qt/cql/Citalopram-QT-Prolonging-Agents.cql   --output /Users/erc53/Github/CQL-Testing-Framework/pddi-rule-tests/citalopram-qt/cql/
 
 using FHIR version '3.0.0'
 
@@ -66,7 +67,6 @@ define "Dose of Citalopram < 60 mg/day":
   return
     C.DailyDosage < 60
 
-
 define "No QT Prolonging Agents":
   not(exists([MedicationStatement: "QT Prolonging Agents VS"]))
 
@@ -111,16 +111,16 @@ define "InPopulation":
    "MeetsInclusionCriteria" 
 
 define "Recommendation":
-  if "Citalopram < 60 mg/day" then 'No special precaution'
-  else if "Citalopram >= 60 mg/day - QT Prolonging Agents" then 'Use only if benefit outweighs risk and monitor patient ECG'
+  if "Citalopram >= 60 mg/day - QT Prolonging Agents" then 'Use only if benefit outweighs risk and monitor patient ECG'
   else if "Citalopram >= 60 mg/day - No QT Prolonging Agents" then 'Minimize risk and Monitor ECG'
+  else if "Citalopram < 60 mg/day" then 'No special precaution'
   else null
 
 define "Rationale":
-  if "Citalopram < 60 mg/day" then null
-  else if "Citalopram >= 60 mg/day - QT Prolonging Agents" then 'Increased risk of prolonged QTc likely'
+  if "Citalopram >= 60 mg/day - QT Prolonging Agents" then 'Increased risk of prolonged QTc likely'
   else if "Citalopram >= 60 mg/day - No QT Prolonging Agents" then 'Increased risk of prolonged QTc possible'
   else null
+
 define "Errors":
   if null then
     {''}
