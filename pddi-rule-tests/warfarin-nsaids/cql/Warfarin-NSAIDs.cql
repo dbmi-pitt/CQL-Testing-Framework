@@ -82,10 +82,11 @@ define "InPopulation":
 
 define "Recommendation":
   if "Warfarin - NSAIDS with PPIs / Misoprostols" then 'Assess risk and take action if necessary'
+  else if "MeetsInclusionCriteria" then 'Start patient on appropriate proton pump inhibitor if they are able. Assess risk and take action if necessary'
   else null
 
 define "Rationale":
-  if "Warfarin - NSAIDS with PPIs / Misoprostols" then 'Possible increased risk of bleeding'
+  if "MeetsInclusionCriteria" then 'Possible increased risk of bleeding'
   else null
 define "Errors":
   null

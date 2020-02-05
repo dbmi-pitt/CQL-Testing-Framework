@@ -550,10 +550,26 @@
                   "type" : "Literal"
                },
                "else" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "operand" : {
-                     "type" : "Null"
+                  "type" : "If",
+                  "condition" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "operand" : {
+                        "name" : "MeetsInclusionCriteria",
+                        "type" : "ExpressionRef"
+                     }
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Start patient on appropriate proton pump inhibitor if they are able. Assess risk and take action if necessary",
+                     "type" : "Literal"
+                  },
+                  "else" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "As",
+                     "operand" : {
+                        "type" : "Null"
+                     }
                   }
                }
             }
@@ -567,7 +583,7 @@
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "operand" : {
-                     "name" : "Warfarin - NSAIDS with PPIs / Misoprostols",
+                     "name" : "MeetsInclusionCriteria",
                      "type" : "ExpressionRef"
                   }
                },

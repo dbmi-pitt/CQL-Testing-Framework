@@ -40,5 +40,5 @@ results:
         Status: active
       PPIsAndMisoprostols: []
     Alert:
-      Rationale: Possible risk of increased bleeding
-      Recommendation: Assess risk and take action if necessary
+      Rationale: Possible increased risk of bleeding
+      Recommendation: Start patient on appropriate proton pump inhibitor if they are able. Assess risk and take action if necessary
