@@ -3,9 +3,10 @@ reusable_resources:
   - resourceType: Medication
     code: RXNORM#283672 Citalopram 10 MG Oral Tablet
     ingredient:
-      -
-        amount:
-          numerator:
-            value: 10
-          denominator:
-            value: 1
+      itemCodeableConcept:
+        coding: RXNORM#2556 Citalopram
+      amount:
+        numerator:
+          value: 10
+        denominator:
+          value: 1

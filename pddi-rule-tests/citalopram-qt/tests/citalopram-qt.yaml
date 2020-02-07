@@ -25,24 +25,14 @@ data:
     doseQuantity:
       value: 1
       unit: tablet
--
-  resourceType: Medication
-  code: RXNORM#283672 Citalopram 10 MG Oral Tablet
-  ingredient:
-    code: RXNORM#2556 Citalopram
-    amount:
-      numerator:
-        value: 10
-      denominator:
-        value: 1
 
 -
   resourceType: MedicationStatement
   code: RXNORM#198052 Ondansetron 4 MG Oral Tablet
   effectiveDateTime: 2019-08-01T00:00:00.000+00:00 
   # effectivePeriod: 2019-08-01T00:00:00.000+00:00 - 2019-08-08T00:00:00.000+00:00
-# -
-#   $import: *citalopramMedications
+-
+  $import: *citalopramMedications
 
 results:
   Summary:
