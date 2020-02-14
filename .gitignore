@@ -8,4 +8,5 @@ yarn-error.log
 **/package-lock.json
 **/node_modules/
 /pddi-rule-tests/old/
-.DS_Store
+**/.DS_Store
+node_modules/

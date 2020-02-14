@@ -3,123 +3,113 @@ library "Citalopram-QT-Prolonging-Agents" version '1.0'
 
 using FHIR version '3.0.0'
 
-include FHIRHelpers version '3.0.0' called FHIRHelpers 
+include FHIRHelpers version '3.0.0' called FHIRHelpers
 
-include CDS_Connect_Commons_for_FHIRv300 version '1.1.0' called C3F 
+include CDS_Connect_Commons_for_FHIRv300 version '1.1.0' called C3F
 
 include ReusableFunctions_FHIRv300 version '1.0.0' called RF
 
-// include CDS_Connect_Conversions version '1' called Convert 
+// include CDS_Connect_Conversions version '1' called Convert
 
 codesystem "RXNORM": 'http://www.nlm.nih.gov/research/umls/rxnorm'
 
 valueset "Citaloprams VS": '2.16.840.1.113762.1.4.1213.3'
 valueset "QT Prolonging Agents VS": '2.16.840.1.113762.1.4.1213.4'
 
-// parameter "Dose of Citalopram" default 60.0 'mg/d'
 
 context Patient
-
-// RISK CONSIDERATIONS
-
-define "Citaloprams":
-  C3F.MedicationStatementLookBack([MedicationStatement: "Citaloprams VS"], 180 days)
-
+// ----- BEGIN MANUAL ADDITION -----
 define "Report Citaloprams":
-  [Medication: "Citaloprams VS"] M
-  with "Citaloprams" S
-    such that M.code.coding.code.value = S.medication.coding.code.value
-      return {
-        Name: RF.ConceptText(M.code as FHIR.CodeableConcept),
-        Start: RF.MedicationStatementDate("Citaloprams"[0]), // TODO not sure how this will handle multiple 
-        End: RF.DateTimeText(("Citaloprams"[0].effective as FHIR.Period)."end"),
-        Status: "Citaloprams"[0].status.value,
-        Ingredient: RF.ConceptText(M.ingredient[0].item as FHIR.CodeableConcept), // TODO deal with potentially more than one ingredient
-        // Numerator: M.ingredient[0].amount.numerator.value.value,
-        // Denominator: M.ingredient[0].amount.denominator.value.value,
-        Amount: M.ingredient[0].amount.numerator.value.value / M.ingredient[0].amount.denominator.value.value,
-        Dosage: "Citaloprams".dosage[0].timing.repeat.frequency.value,
-        DailyDosage: "Citaloprams".dosage[0].timing.repeat.frequency.value * (M.ingredient[0].amount.numerator.value.value / M.ingredient[0].amount.denominator.value.value)
-      }
-      sort by Start desc, End desc
-
-define "QT Prolonging Agents":
-  C3F.MedicationStatementLookBack([MedicationStatement: "QT Prolonging Agents VS"], 180 days)
+    "Citaloprams" S
+        return {
+            // Type:  'Statement',
+            Name:  RF.ConceptText(S.medication as FHIR.CodeableConcept),
+            Start: RF.MedicationStatementDate(S),
+            End:   RF.DateTimeText((S.effective as FHIR.Period)."end"),
+            Status: S.status.value,
+            Dosage: RF.QuantityText(S.dosage[0].dose as FHIR.Quantity),
+            DailyDosage: ToString(S.dosage[0].dose.value * S.dosage[0].maxDosePerPeriod.numerator.value) + ' mg/d'
+        }
+        sort by Start desc, End desc
 
 define "Report QT Prolonging Agents":
-  "QT Prolonging Agents" S
-  return {
-    Type:  'Statement',
-    Name:  RF.ConceptText(S.medication as FHIR.CodeableConcept),
-    Start: RF.MedicationStatementDate(S),
-    End:   RF.DateTimeText((S.effective as FHIR.Period)."end"),
-    Status: S.status.value
-  }
-  sort by Start desc, End desc
-
-define "Dose of Citalopram >= 60 mg/day":
-  "Report Citaloprams" C
-  return
-    C.DailyDosage >= 60
-
-define "Dose of Citalopram < 60 mg/day":
-  "Report Citaloprams" C
-  return
-    C.DailyDosage < 60
-
-define "No QT Prolonging Agents":
-  not(exists([MedicationStatement: "QT Prolonging Agents VS"]))
-
-define "Citaloprams exists":
-  exists("Citaloprams")
-
-define "QT Prolonging Agents exists":
-  exists("QT Prolonging Agents")
+    "QT Prolonging Agents" S
+        return {
+            Type:  'Statement',
+            Name:  RF.ConceptText(S.medication as FHIR.CodeableConcept),
+            Start: RF.MedicationStatementDate(S),
+            End:   RF.DateTimeText((S.effective as FHIR.Period)."end"),
+            Status: S.status.value
+        }
+        sort by Start desc, End desc
 
 define "Basic Concomitant Exposure":
-  "Citaloprams exists"
-  and "QT Prolonging Agents exists"
+  "Citaloprams Exists"
+  and "QT Prolonging Agents Exists"
+
+// ----- END MANUAL ADDITION -----
+define "Citaloprams":
+  [MedicationStatement: "Citaloprams VS"]
+
+define "QT Prolonging Agents":
+  [MedicationStatement: "QT Prolonging Agents VS"]
+
+// Dosage >= 60 mg/d
+define "High Dosage Citaloprams Exist":
+  System.Quantity { value: "Citaloprams".dosage[0].dose.value * "Citaloprams".dosage[0].maxDosePerPeriod.numerator.value, unit: 'mg/d' } >= 60 'mg/d'
+
+
+define "QT Prolonging Agents Exists":
+  exists("QT Prolonging Agents")
+
+// Dosage < 60 mg/d
+define "Not High Dosage Citaloprams Exist":
+  System.Quantity { value: "Citaloprams".dosage[0].dose.value * "Citaloprams".dosage[0].maxDosePerPeriod.numerator.value, unit: 'mg/d' } < 60 'mg/d'
+
+define "Citaloprams Exists":
+  exists("Citaloprams")
+
+define "QT Prolonging Agents Not Exist":
+  not("QT Prolonging Agents Exists")
 
 define "MeetsInclusionCriteria":
-  "Citaloprams exists"
-  // and "QT Prolonging Agents exists"
+  "Citaloprams Exists"
 
-define "Citalopram < 60 mg/day":
+define "Citalopram High Dosage, QT":
   if "InPopulation" is not true then
     null
   else
-  "Citaloprams exists"
-  and "Dose of Citalopram < 60 mg/day"
+  "QT Prolonging Agents Exists"
+  and "High Dosage Citaloprams Exist"
 
-define "Citalopram >= 60 mg/day - QT Prolonging Agents":
+define "Citalopram High Dosage, No QT":
   if "InPopulation" is not true then
     null
   else
-  "Citaloprams exists"
-  and "Dose of Citalopram >= 60 mg/day"
-  and "QT Prolonging Agents exists"
+  "QT Prolonging Agents Not Exist"
+  and "High Dosage Citaloprams Exist"
 
-define "Citalopram >= 60 mg/day - No QT Prolonging Agents":
+define "Citalopram Not High Dosage":
   if "InPopulation" is not true then
     null
   else
-  "Citaloprams exists"
-  and "Dose of Citalopram >= 60 mg/day"
-  and "No QT Prolonging Agents"
+  "Not High Dosage Citaloprams Exist"
 
 define "InPopulation":
-   "MeetsInclusionCriteria" 
+   "MeetsInclusionCriteria"
 
 define "Recommendation":
-  if "Citalopram >= 60 mg/day - QT Prolonging Agents" then 'Use only if benefit outweighs risk and monitor patient ECG'
-  else if "Citalopram >= 60 mg/day - No QT Prolonging Agents" then 'Minimize risk and Monitor ECG'
-  else if "Citalopram < 60 mg/day" then 'No special precaution'
+  if "Citalopram High Dosage, QT" then 'Use only if benefit outweighs risk and monitor patients ECG'
+  else if "Citalopram High Dosage, No QT" then 'Minimize risk and monitor ECG'
+  else if "Citalopram Not High Dosage" then 'No special precaution'
   else null
 
 define "Rationale":
-  if "Citalopram >= 60 mg/day - QT Prolonging Agents" then 'Increased risk of prolonged QTc likely'
-  else if "Citalopram >= 60 mg/day - No QT Prolonging Agents" then 'Increased risk of prolonged QTc possible'
+  if "Citalopram High Dosage, QT" then 'Increased risk of prolonged QTc likely'
+  else if "Citalopram High Dosage, No QT" then 'Increased risk of prolonged QTc possible'
+  else if "Citalopram Not High Dosage" then null
   else null
+// ----- BEGIN MANUAL ADDITION -----
 
 define "Errors":
   if null then
@@ -136,10 +126,11 @@ define Summary: {
     Citaloprams: "Report Citaloprams",
     QTProlongingAgents: "Report QT Prolonging Agents",
     BasicConcomitant: "Basic Concomitant Exposure",
-    HighCitalopramDose: "Dose of Citalopram >= 60 mg/day"
+    HighCitalopramDose: "High Dosage Citaloprams Exist"
   },
   Alert: {
     Recommendation: "Recommendation",
     Rationale: "Rationale"
   }
 }
+// ----- END MANUAL ADDITION -----

@@ -1,5 +1,33 @@
 {
    "library" : {
+      "annotation" : [ {
+         "startLine" : 92,
+         "startChar" : 7,
+         "endLine" : 92,
+         "endChar" : 38,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 99,
+         "startChar" : 7,
+         "endLine" : 99,
+         "endChar" : 39,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 107,
+         "startChar" : 7,
+         "endLine" : 107,
+         "endChar" : 39,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      } ],
       "identifier" : {
          "id" : "Citalopram-QT-Prolonging-Agents",
          "version" : "1.0"
@@ -67,13 +95,22 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "dataType" : "{http://hl7.org/fhir}MedicationStatement",
-               "codeProperty" : "medication",
-               "type" : "Retrieve",
-               "codes" : {
-                  "name" : "Citaloprams VS",
-                  "type" : "ValueSetRef"
-               }
+               "name" : "MedicationStatementLookBack",
+               "libraryName" : "C3F",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                  "codeProperty" : "medication",
+                  "type" : "Retrieve",
+                  "codes" : {
+                     "name" : "Citaloprams VS",
+                     "type" : "ValueSetRef"
+                  }
+               }, {
+                  "value" : 180,
+                  "unit" : "days",
+                  "type" : "Quantity"
+               } ]
             }
          }, {
             "name" : "Report Citaloprams",
@@ -82,13 +119,165 @@
             "expression" : {
                "type" : "Query",
                "source" : [ {
+                  "alias" : "M",
+                  "expression" : {
+                     "dataType" : "{http://hl7.org/fhir}Medication",
+                     "codeProperty" : "code",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Citaloprams VS",
+                        "type" : "ValueSetRef"
+                     }
+                  }
+               } ],
+               "relationship" : [ {
                   "alias" : "S",
+                  "type" : "With",
                   "expression" : {
                      "name" : "Citaloprams",
                      "type" : "ExpressionRef"
+                  },
+                  "suchThat" : {
+                     "type" : "Equal",
+                     "operand" : [ {
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "$this",
+                           "expression" : {
+                              "type" : "Query",
+                              "source" : [ {
+                                 "alias" : "$this",
+                                 "expression" : {
+                                    "path" : "coding",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "code",
+                                       "scope" : "M",
+                                       "type" : "Property"
+                                    }
+                                 }
+                              } ],
+                              "where" : {
+                                 "type" : "Not",
+                                 "operand" : {
+                                    "type" : "IsNull",
+                                    "operand" : {
+                                       "path" : "code",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "name" : "$this",
+                                          "type" : "AliasRef"
+                                       }
+                                    }
+                                 }
+                              },
+                              "return" : {
+                                 "expression" : {
+                                    "path" : "code",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "$this",
+                                       "type" : "AliasRef"
+                                    }
+                                 }
+                              }
+                           }
+                        } ],
+                        "where" : {
+                           "type" : "Not",
+                           "operand" : {
+                              "type" : "IsNull",
+                              "operand" : {
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "name" : "$this",
+                                    "type" : "AliasRef"
+                                 }
+                              }
+                           }
+                        },
+                        "return" : {
+                           "expression" : {
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "$this",
+                                 "type" : "AliasRef"
+                              }
+                           }
+                        }
+                     }, {
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "$this",
+                           "expression" : {
+                              "type" : "Query",
+                              "source" : [ {
+                                 "alias" : "$this",
+                                 "expression" : {
+                                    "path" : "coding",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "medication",
+                                       "scope" : "S",
+                                       "type" : "Property"
+                                    }
+                                 }
+                              } ],
+                              "where" : {
+                                 "type" : "Not",
+                                 "operand" : {
+                                    "type" : "IsNull",
+                                    "operand" : {
+                                       "path" : "code",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "name" : "$this",
+                                          "type" : "AliasRef"
+                                       }
+                                    }
+                                 }
+                              },
+                              "return" : {
+                                 "expression" : {
+                                    "path" : "code",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "name" : "$this",
+                                       "type" : "AliasRef"
+                                    }
+                                 }
+                              }
+                           }
+                        } ],
+                        "where" : {
+                           "type" : "Not",
+                           "operand" : {
+                              "type" : "IsNull",
+                              "operand" : {
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "name" : "$this",
+                                    "type" : "AliasRef"
+                                 }
+                              }
+                           }
+                        },
+                        "return" : {
+                           "expression" : {
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "$this",
+                                 "type" : "AliasRef"
+                              }
+                           }
+                        }
+                     } ]
                   }
                } ],
-               "relationship" : [ ],
                "return" : {
                   "expression" : {
                      "type" : "Tuple",
@@ -102,8 +291,8 @@
                               "strict" : false,
                               "type" : "As",
                               "operand" : {
-                                 "path" : "medication",
-                                 "scope" : "S",
+                                 "path" : "code",
+                                 "scope" : "M",
                                  "type" : "Property"
                               },
                               "asTypeSpecifier" : {
@@ -119,8 +308,15 @@
                            "libraryName" : "RF",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "name" : "S",
-                              "type" : "AliasRef"
+                              "type" : "Indexer",
+                              "operand" : [ {
+                                 "name" : "Citaloprams",
+                                 "type" : "ExpressionRef"
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal"
+                              } ]
                            } ]
                         }
                      }, {
@@ -137,8 +333,18 @@
                                  "type" : "As",
                                  "operand" : {
                                     "path" : "effective",
-                                    "scope" : "S",
-                                    "type" : "Property"
+                                    "type" : "Property",
+                                    "source" : {
+                                       "type" : "Indexer",
+                                       "operand" : [ {
+                                          "name" : "Citaloprams",
+                                          "type" : "ExpressionRef"
+                                       }, {
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "value" : "0",
+                                          "type" : "Literal"
+                                       } ]
+                                    }
                                  },
                                  "asTypeSpecifier" : {
                                     "name" : "{http://hl7.org/fhir}Period",
@@ -154,27 +360,37 @@
                            "type" : "Property",
                            "source" : {
                               "path" : "status",
-                              "scope" : "S",
-                              "type" : "Property"
+                              "type" : "Property",
+                              "source" : {
+                                 "type" : "Indexer",
+                                 "operand" : [ {
+                                    "name" : "Citaloprams",
+                                    "type" : "ExpressionRef"
+                                 }, {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "0",
+                                    "type" : "Literal"
+                                 } ]
+                              }
                            }
                         }
                      }, {
-                        "name" : "Dosage",
+                        "name" : "Ingredient",
                         "value" : {
-                           "name" : "QuantityText",
+                           "name" : "ConceptText",
                            "libraryName" : "RF",
                            "type" : "FunctionRef",
                            "operand" : [ {
                               "strict" : false,
                               "type" : "As",
                               "operand" : {
-                                 "path" : "dose",
+                                 "path" : "item",
                                  "type" : "Property",
                                  "source" : {
                                     "type" : "Indexer",
                                     "operand" : [ {
-                                       "path" : "dosage",
-                                       "scope" : "S",
+                                       "path" : "ingredient",
+                                       "scope" : "M",
                                        "type" : "Property"
                                     }, {
                                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -184,34 +400,218 @@
                                  }
                               },
                               "asTypeSpecifier" : {
-                                 "name" : "{http://hl7.org/fhir}Quantity",
+                                 "name" : "{http://hl7.org/fhir}CodeableConcept",
                                  "type" : "NamedTypeSpecifier"
                               }
                            } ]
                         }
                      }, {
-                        "name" : "DailyDosage",
+                        "name" : "Amount",
                         "value" : {
-                           "type" : "Concatenate",
+                           "type" : "Divide",
                            "operand" : [ {
-                              "type" : "ToString",
-                              "operand" : {
-                                 "type" : "Multiply",
-                                 "operand" : [ {
-                                    "name" : "ToDecimal",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
-                                       "path" : "value",
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "numerator",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "amount",
                                        "type" : "Property",
                                        "source" : {
-                                          "path" : "dose",
+                                          "type" : "Indexer",
+                                          "operand" : [ {
+                                             "path" : "ingredient",
+                                             "scope" : "M",
+                                             "type" : "Property"
+                                          }, {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "value" : "0",
+                                             "type" : "Literal"
+                                          } ]
+                                       }
+                                    }
+                                 }
+                              }
+                           }, {
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "denominator",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "amount",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "type" : "Indexer",
+                                          "operand" : [ {
+                                             "path" : "ingredient",
+                                             "scope" : "M",
+                                             "type" : "Property"
+                                          }, {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "value" : "0",
+                                             "type" : "Literal"
+                                          } ]
+                                       }
+                                    }
+                                 }
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "Dosage",
+                        "value" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "frequency",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "repeat",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "timing",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "type" : "Indexer",
+                                       "operand" : [ {
+                                          "type" : "Flatten",
+                                          "operand" : {
+                                             "type" : "Query",
+                                             "source" : [ {
+                                                "alias" : "$this",
+                                                "expression" : {
+                                                   "name" : "Citaloprams",
+                                                   "type" : "ExpressionRef"
+                                                }
+                                             } ],
+                                             "where" : {
+                                                "type" : "Not",
+                                                "operand" : {
+                                                   "type" : "IsNull",
+                                                   "operand" : {
+                                                      "path" : "dosage",
+                                                      "type" : "Property",
+                                                      "source" : {
+                                                         "name" : "$this",
+                                                         "type" : "AliasRef"
+                                                      }
+                                                   }
+                                                }
+                                             },
+                                             "return" : {
+                                                "expression" : {
+                                                   "path" : "dosage",
+                                                   "type" : "Property",
+                                                   "source" : {
+                                                      "name" : "$this",
+                                                      "type" : "AliasRef"
+                                                   }
+                                                }
+                                             }
+                                          }
+                                       }, {
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "value" : "0",
+                                          "type" : "Literal"
+                                       } ]
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }, {
+                        "name" : "DailyDosage",
+                        "value" : {
+                           "type" : "Multiply",
+                           "operand" : [ {
+                              "type" : "ToDecimal",
+                              "operand" : {
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "frequency",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "repeat",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "path" : "timing",
                                           "type" : "Property",
                                           "source" : {
                                              "type" : "Indexer",
                                              "operand" : [ {
-                                                "path" : "dosage",
-                                                "scope" : "S",
+                                                "type" : "Flatten",
+                                                "operand" : {
+                                                   "type" : "Query",
+                                                   "source" : [ {
+                                                      "alias" : "$this",
+                                                      "expression" : {
+                                                         "name" : "Citaloprams",
+                                                         "type" : "ExpressionRef"
+                                                      }
+                                                   } ],
+                                                   "where" : {
+                                                      "type" : "Not",
+                                                      "operand" : {
+                                                         "type" : "IsNull",
+                                                         "operand" : {
+                                                            "path" : "dosage",
+                                                            "type" : "Property",
+                                                            "source" : {
+                                                               "name" : "$this",
+                                                               "type" : "AliasRef"
+                                                            }
+                                                         }
+                                                      }
+                                                   },
+                                                   "return" : {
+                                                      "expression" : {
+                                                         "path" : "dosage",
+                                                         "type" : "Property",
+                                                         "source" : {
+                                                            "name" : "$this",
+                                                            "type" : "AliasRef"
+                                                         }
+                                                      }
+                                                   }
+                                                }
+                                             }, {
+                                                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                "value" : "0",
+                                                "type" : "Literal"
+                                             } ]
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           }, {
+                              "type" : "Divide",
+                              "operand" : [ {
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "numerator",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "path" : "amount",
+                                          "type" : "Property",
+                                          "source" : {
+                                             "type" : "Indexer",
+                                             "operand" : [ {
+                                                "path" : "ingredient",
+                                                "scope" : "M",
                                                 "type" : "Property"
                                              }, {
                                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -220,41 +620,36 @@
                                              } ]
                                           }
                                        }
-                                    } ]
-                                 }, {
-                                    "name" : "ToDecimal",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
-                                       "path" : "value",
+                                    }
+                                 }
+                              }, {
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "value",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "denominator",
                                        "type" : "Property",
                                        "source" : {
-                                          "path" : "numerator",
+                                          "path" : "amount",
                                           "type" : "Property",
                                           "source" : {
-                                             "path" : "maxDosePerPeriod",
-                                             "type" : "Property",
-                                             "source" : {
-                                                "type" : "Indexer",
-                                                "operand" : [ {
-                                                   "path" : "dosage",
-                                                   "scope" : "S",
-                                                   "type" : "Property"
-                                                }, {
-                                                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                                   "value" : "0",
-                                                   "type" : "Literal"
-                                                } ]
-                                             }
+                                             "type" : "Indexer",
+                                             "operand" : [ {
+                                                "path" : "ingredient",
+                                                "scope" : "M",
+                                                "type" : "Property"
+                                             }, {
+                                                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                "value" : "0",
+                                                "type" : "Literal"
+                                             } ]
                                           }
                                        }
-                                    } ]
-                                 } ]
-                              }
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : " mg/d",
-                              "type" : "Literal"
+                                    }
+                                 }
+                              } ]
                            } ]
                         }
                      } ]
@@ -277,13 +672,22 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "dataType" : "{http://hl7.org/fhir}MedicationStatement",
-               "codeProperty" : "medication",
-               "type" : "Retrieve",
-               "codes" : {
-                  "name" : "QT Prolonging Agents VS",
-                  "type" : "ValueSetRef"
-               }
+               "name" : "MedicationStatementLookBack",
+               "libraryName" : "C3F",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                  "codeProperty" : "medication",
+                  "type" : "Retrieve",
+                  "codes" : {
+                     "name" : "QT Prolonging Agents VS",
+                     "type" : "ValueSetRef"
+                  }
+               }, {
+                  "value" : 180,
+                  "unit" : "days",
+                  "type" : "Quantity"
+               } ]
             }
          }, {
             "name" : "Report QT Prolonging Agents",
@@ -391,7 +795,90 @@
                }
             }
          }, {
-            "name" : "Citaloprams Exists",
+            "name" : "Dose of Citalopram >= 60 mg/day",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "C",
+                  "expression" : {
+                     "name" : "Report Citaloprams",
+                     "type" : "ExpressionRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "expression" : {
+                     "type" : "GreaterOrEqual",
+                     "operand" : [ {
+                        "path" : "DailyDosage",
+                        "scope" : "C",
+                        "type" : "Property"
+                     }, {
+                        "type" : "ToDecimal",
+                        "operand" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "60",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "name" : "Dose of Citalopram < 60 mg/day",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "C",
+                  "expression" : {
+                     "name" : "Report Citaloprams",
+                     "type" : "ExpressionRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "expression" : {
+                     "type" : "Less",
+                     "operand" : [ {
+                        "path" : "DailyDosage",
+                        "scope" : "C",
+                        "type" : "Property"
+                     }, {
+                        "type" : "ToDecimal",
+                        "operand" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "60",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "name" : "No QT Prolonging Agents",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Not",
+               "operand" : {
+                  "type" : "Exists",
+                  "operand" : {
+                     "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                     "codeProperty" : "medication",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "QT Prolonging Agents VS",
+                        "type" : "ValueSetRef"
+                     }
+                  }
+               }
+            }
+         }, {
+            "name" : "Citaloprams exists",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
@@ -402,7 +889,7 @@
                }
             }
          }, {
-            "name" : "QT Prolonging Agents Exists",
+            "name" : "QT Prolonging Agents exists",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
@@ -419,320 +906,19 @@
             "expression" : {
                "type" : "And",
                "operand" : [ {
-                  "name" : "Citaloprams Exists",
+                  "name" : "Citaloprams exists",
                   "type" : "ExpressionRef"
                }, {
-                  "name" : "QT Prolonging Agents Exists",
+                  "name" : "QT Prolonging Agents exists",
                   "type" : "ExpressionRef"
                } ]
-            }
-         }, {
-            "name" : "High Dosage Citaloprams Exist",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "GreaterOrEqual",
-               "operand" : [ {
-                  "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
-                  "type" : "Instance",
-                  "element" : [ {
-                     "name" : "value",
-                     "value" : {
-                        "type" : "Multiply",
-                        "operand" : [ {
-                           "name" : "ToDecimal",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "path" : "dose",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "type" : "Indexer",
-                                    "operand" : [ {
-                                       "type" : "Flatten",
-                                       "operand" : {
-                                          "type" : "Query",
-                                          "source" : [ {
-                                             "alias" : "$this",
-                                             "expression" : {
-                                                "name" : "Citaloprams",
-                                                "type" : "ExpressionRef"
-                                             }
-                                          } ],
-                                          "where" : {
-                                             "type" : "Not",
-                                             "operand" : {
-                                                "type" : "IsNull",
-                                                "operand" : {
-                                                   "path" : "dosage",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "$this",
-                                                      "type" : "AliasRef"
-                                                   }
-                                                }
-                                             }
-                                          },
-                                          "return" : {
-                                             "expression" : {
-                                                "path" : "dosage",
-                                                "type" : "Property",
-                                                "source" : {
-                                                   "name" : "$this",
-                                                   "type" : "AliasRef"
-                                                }
-                                             }
-                                          }
-                                       }
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "0",
-                                       "type" : "Literal"
-                                    } ]
-                                 }
-                              }
-                           } ]
-                        }, {
-                           "name" : "ToDecimal",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "path" : "numerator",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "maxDosePerPeriod",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "type" : "Indexer",
-                                       "operand" : [ {
-                                          "type" : "Flatten",
-                                          "operand" : {
-                                             "type" : "Query",
-                                             "source" : [ {
-                                                "alias" : "$this",
-                                                "expression" : {
-                                                   "name" : "Citaloprams",
-                                                   "type" : "ExpressionRef"
-                                                }
-                                             } ],
-                                             "where" : {
-                                                "type" : "Not",
-                                                "operand" : {
-                                                   "type" : "IsNull",
-                                                   "operand" : {
-                                                      "path" : "dosage",
-                                                      "type" : "Property",
-                                                      "source" : {
-                                                         "name" : "$this",
-                                                         "type" : "AliasRef"
-                                                      }
-                                                   }
-                                                }
-                                             },
-                                             "return" : {
-                                                "expression" : {
-                                                   "path" : "dosage",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "$this",
-                                                      "type" : "AliasRef"
-                                                   }
-                                                }
-                                             }
-                                          }
-                                       }, {
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                          "value" : "0",
-                                          "type" : "Literal"
-                                       } ]
-                                    }
-                                 }
-                              }
-                           } ]
-                        } ]
-                     }
-                  }, {
-                     "name" : "unit",
-                     "value" : {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "mg/d",
-                        "type" : "Literal"
-                     }
-                  } ]
-               }, {
-                  "value" : 60,
-                  "unit" : "mg/d",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
-            "name" : "Not High Dosage Citaloprams Exist",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Less",
-               "operand" : [ {
-                  "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
-                  "type" : "Instance",
-                  "element" : [ {
-                     "name" : "value",
-                     "value" : {
-                        "type" : "Multiply",
-                        "operand" : [ {
-                           "name" : "ToDecimal",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "path" : "dose",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "type" : "Indexer",
-                                    "operand" : [ {
-                                       "type" : "Flatten",
-                                       "operand" : {
-                                          "type" : "Query",
-                                          "source" : [ {
-                                             "alias" : "$this",
-                                             "expression" : {
-                                                "name" : "Citaloprams",
-                                                "type" : "ExpressionRef"
-                                             }
-                                          } ],
-                                          "where" : {
-                                             "type" : "Not",
-                                             "operand" : {
-                                                "type" : "IsNull",
-                                                "operand" : {
-                                                   "path" : "dosage",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "$this",
-                                                      "type" : "AliasRef"
-                                                   }
-                                                }
-                                             }
-                                          },
-                                          "return" : {
-                                             "expression" : {
-                                                "path" : "dosage",
-                                                "type" : "Property",
-                                                "source" : {
-                                                   "name" : "$this",
-                                                   "type" : "AliasRef"
-                                                }
-                                             }
-                                          }
-                                       }
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "0",
-                                       "type" : "Literal"
-                                    } ]
-                                 }
-                              }
-                           } ]
-                        }, {
-                           "name" : "ToDecimal",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "path" : "numerator",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "maxDosePerPeriod",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "type" : "Indexer",
-                                       "operand" : [ {
-                                          "type" : "Flatten",
-                                          "operand" : {
-                                             "type" : "Query",
-                                             "source" : [ {
-                                                "alias" : "$this",
-                                                "expression" : {
-                                                   "name" : "Citaloprams",
-                                                   "type" : "ExpressionRef"
-                                                }
-                                             } ],
-                                             "where" : {
-                                                "type" : "Not",
-                                                "operand" : {
-                                                   "type" : "IsNull",
-                                                   "operand" : {
-                                                      "path" : "dosage",
-                                                      "type" : "Property",
-                                                      "source" : {
-                                                         "name" : "$this",
-                                                         "type" : "AliasRef"
-                                                      }
-                                                   }
-                                                }
-                                             },
-                                             "return" : {
-                                                "expression" : {
-                                                   "path" : "dosage",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "$this",
-                                                      "type" : "AliasRef"
-                                                   }
-                                                }
-                                             }
-                                          }
-                                       }, {
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                          "value" : "0",
-                                          "type" : "Literal"
-                                       } ]
-                                    }
-                                 }
-                              }
-                           } ]
-                        } ]
-                     }
-                  }, {
-                     "name" : "unit",
-                     "value" : {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "mg/d",
-                        "type" : "Literal"
-                     }
-                  } ]
-               }, {
-                  "value" : 60,
-                  "unit" : "mg/d",
-                  "type" : "Quantity"
-               } ]
-            }
-         }, {
-            "name" : "QT Prolonging Agents Not Exist",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "type" : "Not",
-               "operand" : {
-                  "name" : "QT Prolonging Agents Exists",
-                  "type" : "ExpressionRef"
-               }
             }
          }, {
             "name" : "MeetsInclusionCriteria",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "name" : "Citaloprams Exists",
+               "name" : "Citaloprams exists",
                "type" : "ExpressionRef"
             }
          }, {
@@ -744,7 +930,7 @@
                "type" : "ExpressionRef"
             }
          }, {
-            "name" : "Citalopram High Dosage, QT",
+            "name" : "Citalopram < 60 mg/day",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
@@ -773,16 +959,19 @@
                "else" : {
                   "type" : "And",
                   "operand" : [ {
-                     "name" : "QT Prolonging Agents Exists",
+                     "name" : "Citaloprams exists",
                      "type" : "ExpressionRef"
                   }, {
-                     "name" : "High Dosage Citaloprams Exist",
-                     "type" : "ExpressionRef"
+                     "type" : "SingletonFrom",
+                     "operand" : {
+                        "name" : "Dose of Citalopram < 60 mg/day",
+                        "type" : "ExpressionRef"
+                     }
                   } ]
                }
             }
          }, {
-            "name" : "Citalopram High Dosage, No QT",
+            "name" : "Citalopram >= 60 mg/day - QT Prolonging Agents",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
@@ -811,16 +1000,25 @@
                "else" : {
                   "type" : "And",
                   "operand" : [ {
-                     "name" : "QT Prolonging Agents Not Exist",
-                     "type" : "ExpressionRef"
+                     "type" : "And",
+                     "operand" : [ {
+                        "name" : "Citaloprams exists",
+                        "type" : "ExpressionRef"
+                     }, {
+                        "type" : "SingletonFrom",
+                        "operand" : {
+                           "name" : "Dose of Citalopram >= 60 mg/day",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
                   }, {
-                     "name" : "High Dosage Citaloprams Exist",
+                     "name" : "QT Prolonging Agents exists",
                      "type" : "ExpressionRef"
                   } ]
                }
             }
          }, {
-            "name" : "Citalopram Not High Dosage",
+            "name" : "Citalopram >= 60 mg/day - No QT Prolonging Agents",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
@@ -847,8 +1045,23 @@
                   }
                },
                "else" : {
-                  "name" : "Not High Dosage Citaloprams Exist",
-                  "type" : "ExpressionRef"
+                  "type" : "And",
+                  "operand" : [ {
+                     "type" : "And",
+                     "operand" : [ {
+                        "name" : "Citaloprams exists",
+                        "type" : "ExpressionRef"
+                     }, {
+                        "type" : "SingletonFrom",
+                        "operand" : {
+                           "name" : "Dose of Citalopram >= 60 mg/day",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }, {
+                     "name" : "No QT Prolonging Agents",
+                     "type" : "ExpressionRef"
+                  } ]
                }
             }
          }, {
@@ -861,13 +1074,13 @@
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "operand" : {
-                     "name" : "Citalopram High Dosage, QT",
+                     "name" : "Citalopram >= 60 mg/day - QT Prolonging Agents",
                      "type" : "ExpressionRef"
                   }
                },
                "then" : {
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Use only if benefit outweighs risk and monitor patients ECG",
+                  "value" : "Use only if benefit outweighs risk and monitor patient ECG",
                   "type" : "Literal"
                },
                "else" : {
@@ -876,13 +1089,13 @@
                      "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "As",
                      "operand" : {
-                        "name" : "Citalopram High Dosage, No QT",
+                        "name" : "Citalopram >= 60 mg/day - No QT Prolonging Agents",
                         "type" : "ExpressionRef"
                      }
                   },
                   "then" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "Minimize risk and monitor ECG",
+                     "value" : "Minimize risk and Monitor ECG",
                      "type" : "Literal"
                   },
                   "else" : {
@@ -891,7 +1104,7 @@
                         "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "As",
                         "operand" : {
-                           "name" : "Citalopram Not High Dosage",
+                           "name" : "Citalopram < 60 mg/day",
                            "type" : "ExpressionRef"
                         }
                      },
@@ -920,7 +1133,7 @@
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "operand" : {
-                     "name" : "Citalopram High Dosage, QT",
+                     "name" : "Citalopram >= 60 mg/day - QT Prolonging Agents",
                      "type" : "ExpressionRef"
                   }
                },
@@ -935,7 +1148,7 @@
                      "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "As",
                      "operand" : {
-                        "name" : "Citalopram High Dosage, No QT",
+                        "name" : "Citalopram >= 60 mg/day - No QT Prolonging Agents",
                         "type" : "ExpressionRef"
                      }
                   },
@@ -948,21 +1161,7 @@
                      "asType" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "As",
                      "operand" : {
-                        "type" : "If",
-                        "condition" : {
-                           "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "As",
-                           "operand" : {
-                              "name" : "Citalopram Not High Dosage",
-                              "type" : "ExpressionRef"
-                           }
-                        },
-                        "then" : {
-                           "type" : "Null"
-                        },
-                        "else" : {
-                           "type" : "Null"
-                        }
+                        "type" : "Null"
                      }
                   }
                }
@@ -1201,7 +1400,7 @@
                      }, {
                         "name" : "HighCitalopramDose",
                         "value" : {
-                           "name" : "High Dosage Citaloprams Exist",
+                           "name" : "Dose of Citalopram >= 60 mg/day",
                            "type" : "ExpressionRef"
                         }
                      } ]

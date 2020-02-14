@@ -429,6 +429,12 @@ define function ActiveCompletedOrStoppedMedicationRequest(MedList List<Medicatio
 * @returns {List<MedicationRequest>} a list of Medications prescribed in the look back period, or null if null
 * was passed in
 */
+
+
+define function MedicationStatementDose(MedList List<MedicationStatement>, Unit System.Quantity):
+    MedList M
+        where (M.dosage[0].dose as FHIR.Quantity) = Unit
+
 define function MedicationRequestLookBack(MedList List<MedicationRequest>, LookBack System.Quantity):
 MedList M
   let LookBackInterval: Interval[Now() - LookBack, Now()]

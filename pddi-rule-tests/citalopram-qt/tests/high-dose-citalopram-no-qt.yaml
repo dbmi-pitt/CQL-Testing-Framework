@@ -17,16 +17,28 @@ data:
   dosage: 
   -
     text: once every 3 hours
-    timing: 
-      repeat:
-        frequency: 8
-        period: 1
-        periodUnit: d
+    maxDosePerPeriod:
+      numerator:
+        value: 8
+      denominator:
+        value: 1
+        system: http://unitsofmeasure.org
+        code: d
     doseQuantity:
-      value: 1
-      unit: tablet
--
-  $import: *citalopramMedications
+      value: 10
+      unit: mg
+      code: mg
+      system: http://unitsofmeasure.org
+
+#  resourceType: Medication
+#  code: RXNORM#283672 Citalopram 10 MG Oral Tablet
+#  ingredient:
+#    code: RXNORM#2556 Citalopram
+#    amount:
+#      numerator:
+#        value: 10
+#      denominator:
+#        value: 1
 
 results:
   Summary:
@@ -42,12 +54,10 @@ results:
         Start: '2019-07-30T00:00:00.000+00:00'
         End: null
         Status: active
-        Ingredient: Citalopram
-        Amount: 10
-        Dosage: 8
-        DailyDosage: 80
-      HighCitalopramDose: [true]
+        Dosage: 10 mg
+        DailyDosage: 80 mg/d
+      HighCitalopramDose: true
       QTProlongingAgents: []
     Alert:
       Rationale: Increased risk of prolonged QTc possible
-      Recommendation: Minimize risk and Monitor ECG
+      Recommendation: Minimize risk and monitor ECG

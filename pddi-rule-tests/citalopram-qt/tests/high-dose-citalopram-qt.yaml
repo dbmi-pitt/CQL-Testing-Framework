@@ -17,22 +17,25 @@ data:
   dosage: 
   -
     text: once every 3 hours
-    timing: 
-      repeat:
-        frequency: 8
-        period: 1
-        periodUnit: d
+    maxDosePerPeriod:
+      numerator:
+        value: 8
+      denominator:
+        value: 1
+        system: http://unitsofmeasure.org
+        code: d
     doseQuantity:
-      value: 1
-      unit: tablet
-
+        value: 10
+        unit: mg
+        code: mg
+        system: http://unitsofmeasure.org
 -
   resourceType: MedicationStatement
   code: RXNORM#198052 Ondansetron 4 MG Oral Tablet
-  effectiveDateTime: 2019-08-01T00:00:00.000+00:00 
+  effectiveDateTime: 2019-08-01T00:00:00.000+00:00
   # effectivePeriod: 2019-08-01T00:00:00.000+00:00 - 2019-08-08T00:00:00.000+00:00
--
-  $import: *citalopramMedications
+# -
+#   $import: *citalopramMedications
 
 results:
   Summary:
@@ -48,12 +51,10 @@ results:
         Start: '2019-07-30T00:00:00.000+00:00'
         End: null
         Status: active
-        Ingredient: Citalopram
-        Amount: 10
-        Dosage: 8
-        DailyDosage: 80
-      HighCitalopramDose: [true]
-      QTProlongingAgents: 
+        Dosage: 10 mg
+        DailyDosage: 80 mg/d
+      HighCitalopramDose: true
+      QTProlongingAgents:
       -
         Type: Statement
         Name: Ondansetron 4 MG Oral Tablet
@@ -62,4 +63,4 @@ results:
         Status: active
     Alert:
       Rationale: Increased risk of prolonged QTc likely
-      Recommendation: Use only if benefit outweighs risk and monitor patient ECG
+      Recommendation: Use only if benefit outweighs risk and monitor patients ECG

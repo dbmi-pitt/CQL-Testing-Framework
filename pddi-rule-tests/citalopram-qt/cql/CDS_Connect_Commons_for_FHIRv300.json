@@ -2344,6 +2344,73 @@
                }
             } ]
          }, {
+            "name" : "MedicationStatementDose",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "expression" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "M",
+                  "expression" : {
+                     "name" : "MedList",
+                     "type" : "OperandRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "type" : "Equal",
+                  "operand" : [ {
+                     "name" : "ToQuantity",
+                     "libraryName" : "FHIRHelpers",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "path" : "dose",
+                           "type" : "Property",
+                           "source" : {
+                              "type" : "Indexer",
+                              "operand" : [ {
+                                 "path" : "dosage",
+                                 "scope" : "M",
+                                 "type" : "Property"
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal"
+                              } ]
+                           }
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{http://hl7.org/fhir}Quantity",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }, {
+                     "name" : "Unit",
+                     "type" : "OperandRef"
+                  } ]
+               }
+            },
+            "operand" : [ {
+               "name" : "MedList",
+               "operandTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}MedicationStatement",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }, {
+               "name" : "Unit",
+               "operandTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
             "name" : "MedicationRequestLookBack",
             "context" : "Patient",
             "accessLevel" : "Public",

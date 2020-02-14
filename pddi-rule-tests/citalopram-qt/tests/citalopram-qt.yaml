@@ -1,3 +1,38 @@
+#Dose example from https://hl7.org/fhir/STU3/medicationstatementexample6.json.html
+#"dosage": [
+#    {
+#      "sequence": 1,
+#      "text": "5ml three times daily",
+#      "asNeededBoolean": false,
+#      "route": {
+#        "coding": [
+#          {
+#            "system": "http://snomed.info/sct",
+#            "code": "260548002",
+#            "display": "Oral"
+#          }
+#        ]
+#      },
+#      "doseQuantity": {
+#        "value": 5,
+#        "unit": "mL",
+#        "system": "http://unitsofmeasure.org",
+#        "code": "mL"
+#      },
+#      "maxDosePerPeriod": {
+#        "numerator": {
+#          "value": 3
+#        },
+#        "denominator": {
+#          "value": 1,
+#          "system": "http://unitsofmeasure.org",
+#          "code": "d"
+#        }
+#      }
+#    }
+
+
+
 ---
 name: Citalopram not high dose with a QT-agent
 
@@ -13,26 +48,45 @@ data:
 -
   resourceType: MedicationStatement
   code: RXNORM#283672 Citalopram 10 MG Oral Tablet
-  effectiveDateTime: 2019-07-30T00:00:00.000+00:00 
-  dosage: 
+  effectiveDateTime: 2019-07-30T00:00:00.000+00:00
+  dosage:
   -
     text: once daily
-    timing: 
-      repeat:
-        frequency: 1
-        period: 1
-        periodUnit: d
+#    timing:
+#      repeat:
+#        frequency: 1
+#        period: 1
+#        periodUnit: d
+    maxDosePerPeriod:
+      numerator:
+        value: 3
+      denominator:
+        value: 1
+        system: http://unitsofmeasure.org
+        code: d
     doseQuantity:
-      value: 1
-      unit: tablet
+      value: 10
+      unit: mg
+      code: mg
+      system: http://unitsofmeasure.org
+
+#  resourceType: Medication
+#  code: RXNORM#283672 Citalopram 10 MG Oral Tablet
+#  ingredient:
+#    code: RXNORM#2556 Citalopram
+#    amount:
+#      numerator:
+#        value: 10
+#      denominator:
+#        value: 1
 
 -
   resourceType: MedicationStatement
   code: RXNORM#198052 Ondansetron 4 MG Oral Tablet
-  effectiveDateTime: 2019-08-01T00:00:00.000+00:00 
+  effectiveDateTime: 2019-08-01T00:00:00.000+00:00
   # effectivePeriod: 2019-08-01T00:00:00.000+00:00 - 2019-08-08T00:00:00.000+00:00
--
-  $import: *citalopramMedications
+# -
+#   $import: *citalopramMedications
 
 results:
   Summary:
@@ -48,11 +102,10 @@ results:
         Start: '2019-07-30T00:00:00.000+00:00'
         End: null
         Status: active
-        Ingredient: Citalopram
-        Amount: 10
-        Dosage: 1
-        DailyDosage: 10
-      HighCitalopramDose: [false]
+#        Ingredient: Citalopram
+        Dosage: 10 mg
+        DailyDosage: 30 mg/d
+      HighCitalopramDose: false
       QTProlongingAgents: 
       -
         Type: Statement
