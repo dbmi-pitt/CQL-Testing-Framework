@@ -28,7 +28,7 @@ define "Report Citaloprams":
             End:   RF.DateTimeText((S.effective as FHIR.Period)."end"),
             Status: S.status.value,
             Dosage: RF.QuantityText(S.dosage[0].dose as FHIR.Quantity),
-            DailyDosage: ToString(S.dosage[0].dose.value * S.dosage[0].maxDosePerPeriod.numerator.value) + ' mg/d'
+            DailyDosage: ToString(S.dosage[0].dose.value * S.dosage[0].timing.repeat.frequency.value) +  ' mg/d'
         }
         sort by Start desc, End desc
 
@@ -56,7 +56,7 @@ define "QT Prolonging Agents":
 
 // Dosage >= 60 mg/d
 define "High Dosage Citaloprams Exist":
-  System.Quantity { value: "Citaloprams".dosage[0].dose.value * "Citaloprams".dosage[0].maxDosePerPeriod.numerator.value, unit: 'mg/d' } >= 60 'mg/d'
+  System.Quantity { value: "Citaloprams".dosage[0].dose.value * "Citaloprams".dosage[0].timing.repeat.frequency.value, unit: 'mg/d' } >= 60 'mg/d'
 
 
 define "QT Prolonging Agents Exists":
@@ -64,7 +64,7 @@ define "QT Prolonging Agents Exists":
 
 // Dosage < 60 mg/d
 define "Not High Dosage Citaloprams Exist":
-  System.Quantity { value: "Citaloprams".dosage[0].dose.value * "Citaloprams".dosage[0].maxDosePerPeriod.numerator.value, unit: 'mg/d' } < 60 'mg/d'
+  System.Quantity { value: "Citaloprams".dosage[0].dose.value * "Citaloprams".dosage[0].timing.repeat.frequency.value, unit: 'mg/d' } < 60 'mg/d'
 
 define "Citaloprams Exists":
   exists("Citaloprams")

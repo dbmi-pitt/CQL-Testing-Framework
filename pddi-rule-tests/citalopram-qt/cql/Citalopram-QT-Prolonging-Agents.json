@@ -222,33 +222,35 @@
                                        }
                                     } ]
                                  }, {
-                                    "name" : "ToDecimal",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
+                                    "type" : "ToDecimal",
+                                    "operand" : {
                                        "path" : "value",
                                        "type" : "Property",
                                        "source" : {
-                                          "path" : "numerator",
+                                          "path" : "frequency",
                                           "type" : "Property",
                                           "source" : {
-                                             "path" : "maxDosePerPeriod",
+                                             "path" : "repeat",
                                              "type" : "Property",
                                              "source" : {
-                                                "type" : "Indexer",
-                                                "operand" : [ {
-                                                   "path" : "dosage",
-                                                   "scope" : "S",
-                                                   "type" : "Property"
-                                                }, {
-                                                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                                   "value" : "0",
-                                                   "type" : "Literal"
-                                                } ]
+                                                "path" : "timing",
+                                                "type" : "Property",
+                                                "source" : {
+                                                   "type" : "Indexer",
+                                                   "operand" : [ {
+                                                      "path" : "dosage",
+                                                      "scope" : "S",
+                                                      "type" : "Property"
+                                                   }, {
+                                                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                      "value" : "0",
+                                                      "type" : "Literal"
+                                                   } ]
+                                                }
                                              }
                                           }
                                        }
-                                    } ]
+                                    }
                                  } ]
                               }
                            }, {
@@ -496,36 +498,48 @@
                               }
                            } ]
                         }, {
-                           "name" : "ToDecimal",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
+                           "type" : "ToDecimal",
+                           "operand" : {
                               "path" : "value",
                               "type" : "Property",
                               "source" : {
-                                 "path" : "numerator",
+                                 "path" : "frequency",
                                  "type" : "Property",
                                  "source" : {
-                                    "path" : "maxDosePerPeriod",
+                                    "path" : "repeat",
                                     "type" : "Property",
                                     "source" : {
-                                       "type" : "Indexer",
-                                       "operand" : [ {
-                                          "type" : "Flatten",
-                                          "operand" : {
-                                             "type" : "Query",
-                                             "source" : [ {
-                                                "alias" : "$this",
-                                                "expression" : {
-                                                   "name" : "Citaloprams",
-                                                   "type" : "ExpressionRef"
-                                                }
-                                             } ],
-                                             "where" : {
-                                                "type" : "Not",
-                                                "operand" : {
-                                                   "type" : "IsNull",
+                                       "path" : "timing",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "type" : "Indexer",
+                                          "operand" : [ {
+                                             "type" : "Flatten",
+                                             "operand" : {
+                                                "type" : "Query",
+                                                "source" : [ {
+                                                   "alias" : "$this",
+                                                   "expression" : {
+                                                      "name" : "Citaloprams",
+                                                      "type" : "ExpressionRef"
+                                                   }
+                                                } ],
+                                                "where" : {
+                                                   "type" : "Not",
                                                    "operand" : {
+                                                      "type" : "IsNull",
+                                                      "operand" : {
+                                                         "path" : "dosage",
+                                                         "type" : "Property",
+                                                         "source" : {
+                                                            "name" : "$this",
+                                                            "type" : "AliasRef"
+                                                         }
+                                                      }
+                                                   }
+                                                },
+                                                "return" : {
+                                                   "expression" : {
                                                       "path" : "dosage",
                                                       "type" : "Property",
                                                       "source" : {
@@ -534,27 +548,17 @@
                                                       }
                                                    }
                                                 }
-                                             },
-                                             "return" : {
-                                                "expression" : {
-                                                   "path" : "dosage",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "$this",
-                                                      "type" : "AliasRef"
-                                                   }
-                                                }
                                              }
-                                          }
-                                       }, {
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                          "value" : "0",
-                                          "type" : "Literal"
-                                       } ]
+                                          }, {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "value" : "0",
+                                             "type" : "Literal"
+                                          } ]
+                                       }
                                     }
                                  }
                               }
-                           } ]
+                           }
                         } ]
                      }
                   }, {
@@ -641,36 +645,48 @@
                               }
                            } ]
                         }, {
-                           "name" : "ToDecimal",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
+                           "type" : "ToDecimal",
+                           "operand" : {
                               "path" : "value",
                               "type" : "Property",
                               "source" : {
-                                 "path" : "numerator",
+                                 "path" : "frequency",
                                  "type" : "Property",
                                  "source" : {
-                                    "path" : "maxDosePerPeriod",
+                                    "path" : "repeat",
                                     "type" : "Property",
                                     "source" : {
-                                       "type" : "Indexer",
-                                       "operand" : [ {
-                                          "type" : "Flatten",
-                                          "operand" : {
-                                             "type" : "Query",
-                                             "source" : [ {
-                                                "alias" : "$this",
-                                                "expression" : {
-                                                   "name" : "Citaloprams",
-                                                   "type" : "ExpressionRef"
-                                                }
-                                             } ],
-                                             "where" : {
-                                                "type" : "Not",
-                                                "operand" : {
-                                                   "type" : "IsNull",
+                                       "path" : "timing",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "type" : "Indexer",
+                                          "operand" : [ {
+                                             "type" : "Flatten",
+                                             "operand" : {
+                                                "type" : "Query",
+                                                "source" : [ {
+                                                   "alias" : "$this",
+                                                   "expression" : {
+                                                      "name" : "Citaloprams",
+                                                      "type" : "ExpressionRef"
+                                                   }
+                                                } ],
+                                                "where" : {
+                                                   "type" : "Not",
                                                    "operand" : {
+                                                      "type" : "IsNull",
+                                                      "operand" : {
+                                                         "path" : "dosage",
+                                                         "type" : "Property",
+                                                         "source" : {
+                                                            "name" : "$this",
+                                                            "type" : "AliasRef"
+                                                         }
+                                                      }
+                                                   }
+                                                },
+                                                "return" : {
+                                                   "expression" : {
                                                       "path" : "dosage",
                                                       "type" : "Property",
                                                       "source" : {
@@ -679,27 +695,17 @@
                                                       }
                                                    }
                                                 }
-                                             },
-                                             "return" : {
-                                                "expression" : {
-                                                   "path" : "dosage",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "$this",
-                                                      "type" : "AliasRef"
-                                                   }
-                                                }
                                              }
-                                          }
-                                       }, {
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                          "value" : "0",
-                                          "type" : "Literal"
-                                       } ]
+                                          }, {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "value" : "0",
+                                             "type" : "Literal"
+                                          } ]
+                                       }
                                     }
                                  }
                               }
-                           } ]
+                           }
                         } ]
                      }
                   }, {

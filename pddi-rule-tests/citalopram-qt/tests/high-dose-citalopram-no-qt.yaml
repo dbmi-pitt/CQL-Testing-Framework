@@ -17,13 +17,11 @@ data:
   dosage: 
   -
     text: once every 3 hours
-    maxDosePerPeriod:
-      numerator:
-        value: 8
-      denominator:
-        value: 1
-        system: http://unitsofmeasure.org
-        code: d
+    timing:
+      repeat:
+        frequency: 8
+        period: 1
+        periodUnit: d
     doseQuantity:
       value: 10
       unit: mg
