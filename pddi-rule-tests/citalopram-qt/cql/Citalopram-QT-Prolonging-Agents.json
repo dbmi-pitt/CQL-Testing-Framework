@@ -867,13 +867,13 @@
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "operand" : {
-                     "name" : "Citalopram High Dosage, QT",
+                     "name" : "Citalopram High Dosage, No QT",
                      "type" : "ExpressionRef"
                   }
                },
                "then" : {
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Use only if benefit outweighs risk and monitor patients ECG",
+                  "value" : "Minimize risk and monitor ECG",
                   "type" : "Literal"
                },
                "else" : {
@@ -882,13 +882,13 @@
                      "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "As",
                      "operand" : {
-                        "name" : "Citalopram High Dosage, No QT",
+                        "name" : "Citalopram High Dosage, QT",
                         "type" : "ExpressionRef"
                      }
                   },
                   "then" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "Minimize risk and monitor ECG",
+                     "value" : "Use only if benefit outweighs risk and monitor patients ECG",
                      "type" : "Literal"
                   },
                   "else" : {
@@ -926,13 +926,13 @@
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "operand" : {
-                     "name" : "Citalopram High Dosage, QT",
+                     "name" : "Citalopram High Dosage, No QT",
                      "type" : "ExpressionRef"
                   }
                },
                "then" : {
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Increased risk of prolonged QTc likely",
+                  "value" : "Increased risk of prolonged QTc possible",
                   "type" : "Literal"
                },
                "else" : {
@@ -941,13 +941,13 @@
                      "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "As",
                      "operand" : {
-                        "name" : "Citalopram High Dosage, No QT",
+                        "name" : "Citalopram High Dosage, QT",
                         "type" : "ExpressionRef"
                      }
                   },
                   "then" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "Increased risk of prolonged QTc possible",
+                     "value" : "Increased risk of prolonged QTc likely",
                      "type" : "Literal"
                   },
                   "else" : {
@@ -967,6 +967,124 @@
                            "type" : "Null"
                         },
                         "else" : {
+                           "type" : "Null"
+                        }
+                     }
+                  }
+               }
+            }
+         }, {
+            "name" : "Classification",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "name" : "Citalopram High Dosage, No QT",
+                     "type" : "ExpressionRef"
+                  }
+               },
+               "then" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Minimize Risk",
+                  "type" : "Literal"
+               },
+               "else" : {
+                  "type" : "If",
+                  "condition" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "operand" : {
+                        "name" : "Citalopram High Dosage, QT",
+                        "type" : "ExpressionRef"
+                     }
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Usually Avoid Combination",
+                     "type" : "Literal"
+                  },
+                  "else" : {
+                     "type" : "If",
+                     "condition" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "As",
+                        "operand" : {
+                           "name" : "Citalopram Not High Dosage",
+                           "type" : "ExpressionRef"
+                        }
+                     },
+                     "then" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "No Special Precautions",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "Null"
+                        }
+                     }
+                  }
+               }
+            }
+         }, {
+            "name" : "Indicator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "name" : "Citalopram High Dosage, No QT",
+                     "type" : "ExpressionRef"
+                  }
+               },
+               "then" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "warning",
+                  "type" : "Literal"
+               },
+               "else" : {
+                  "type" : "If",
+                  "condition" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "operand" : {
+                        "name" : "Citalopram High Dosage, QT",
+                        "type" : "ExpressionRef"
+                     }
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "critical",
+                     "type" : "Literal"
+                  },
+                  "else" : {
+                     "type" : "If",
+                     "condition" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "As",
+                        "operand" : {
+                           "name" : "Citalopram Not High Dosage",
+                           "type" : "ExpressionRef"
+                        }
+                     },
+                     "then" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "info",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "As",
+                        "operand" : {
                            "type" : "Null"
                         }
                      }
@@ -1226,6 +1344,18 @@
                         "name" : "Rationale",
                         "value" : {
                            "name" : "Rationale",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "Classification",
+                        "value" : {
+                           "name" : "Classification",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "Indicator",
+                        "value" : {
+                           "name" : "Indicator",
                            "type" : "ExpressionRef"
                         }
                      } ]

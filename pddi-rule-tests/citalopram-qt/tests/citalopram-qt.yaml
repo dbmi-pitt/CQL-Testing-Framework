@@ -16,7 +16,7 @@ data:
   effectiveDateTime: 2019-07-30T00:00:00.000+00:00
   dosage:
   -
-    text: once daily
+    text: three times a day
     timing:
       repeat:
         frequency: 3
@@ -64,3 +64,5 @@ results:
     Alert:
       Rationale: null
       Recommendation: No special precaution
+      Classification: No Special Precautions
+      Indicator: info

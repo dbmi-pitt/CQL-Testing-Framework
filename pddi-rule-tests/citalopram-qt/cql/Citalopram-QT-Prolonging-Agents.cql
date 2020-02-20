@@ -99,15 +99,27 @@ define "InPopulation":
    "MeetsInclusionCriteria"
 
 define "Recommendation":
-  if "Citalopram High Dosage, QT" then 'Use only if benefit outweighs risk and monitor patients ECG'
-  else if "Citalopram High Dosage, No QT" then 'Minimize risk and monitor ECG'
+  if "Citalopram High Dosage, No QT" then 'Minimize risk and monitor ECG'
+  else if "Citalopram High Dosage, QT" then 'Use only if benefit outweighs risk and monitor patients ECG'
   else if "Citalopram Not High Dosage" then 'No special precaution'
   else null
 
 define "Rationale":
-  if "Citalopram High Dosage, QT" then 'Increased risk of prolonged QTc likely'
-  else if "Citalopram High Dosage, No QT" then 'Increased risk of prolonged QTc possible'
+  if "Citalopram High Dosage, No QT" then 'Increased risk of prolonged QTc possible'
+  else if "Citalopram High Dosage, QT" then 'Increased risk of prolonged QTc likely'
   else if "Citalopram Not High Dosage" then null
+  else null
+
+define "Classification":
+  if "Citalopram High Dosage, No QT" then 'Minimize Risk'
+  else if "Citalopram High Dosage, QT" then 'Usually Avoid Combination'
+  else if "Citalopram Not High Dosage" then 'No Special Precautions'
+  else null
+
+define "Indicator":
+  if "Citalopram High Dosage, No QT" then 'warning'
+  else if "Citalopram High Dosage, QT" then 'critical'
+  else if "Citalopram Not High Dosage" then 'info'
   else null
 // ----- BEGIN MANUAL ADDITION -----
 
@@ -130,7 +142,9 @@ define Summary: {
   },
   Alert: {
     Recommendation: "Recommendation",
-    Rationale: "Rationale"
+    Rationale: "Rationale",
+    Classification: "Classification",
+    Indicator: "Indicator"
   }
 }
 // ----- END MANUAL ADDITION -----

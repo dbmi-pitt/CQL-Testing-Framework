@@ -62,3 +62,5 @@ results:
     Alert:
       Rationale: Increased risk of prolonged QTc likely
       Recommendation: Use only if benefit outweighs risk and monitor patients ECG
+      Classification: Usually Avoid Combination
+      Indicator: critical

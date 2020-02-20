@@ -59,3 +59,5 @@ results:
     Alert:
       Rationale: Increased risk of prolonged QTc possible
       Recommendation: Minimize risk and monitor ECG
+      Classification: Minimize Risk
+      Indicator: warning
