@@ -67,7 +67,7 @@ define "Report Non-Acetylated Salicylates":
         // Denominator: M.ingredient[0].amount.denominator.value.value,
         Amount: M.ingredient[0].amount.numerator.value.value / M.ingredient[0].amount.denominator.value.value,
         Dosage: "Non-Acetylated Salicylates".dosage[0].timing.repeat.frequency.value,
-        DailyDosage: "Non-Acetylated Salicylates".dosage[0].timing.repeat.frequency.value * (M.ingredient[0].amount.numerator.value.value / M.ingredient[0].amount.denominator.value.value)
+        DailyDosage: System.Quantity { value: [MedicationStatement: "Non Acetylated Salicylates VS"].dosage[0].dose.value * [MedicationStatement: "Non Acetylated Salicylates VS"].dosage[0].timing.repeat.frequency.value, unit: 'mg/d' } 
       }
       sort by Start desc, End desc
 
@@ -127,9 +127,9 @@ define "Warfarin - Non-Acetylated Salicylates":
   else
   exists("Non-Acetylated Salicylates")
 
+// BOOLEAN FOR IF ANY HIGH DOSAGE EXISTS
 define "Non-Acetylated Salicylate dose >= 3 grams/day":
-  "Report Non-Acetylated Salicylates" S
-  where S.DailyDosage >= 3
+  System.Quantity { value: [MedicationStatement: "Non Acetylated Salicylates VS"].dosage[0].dose.value * [MedicationStatement: "Non Acetylated Salicylates VS"].dosage[0].timing.repeat.frequency.value, unit: 'mg/d' } >= 3 'mg/d'
 
 define "Non-Acetylated Salicylate dose < 3 grams/day":
   not exists("Non-Acetylated Salicylate dose >= 3 grams/day")
