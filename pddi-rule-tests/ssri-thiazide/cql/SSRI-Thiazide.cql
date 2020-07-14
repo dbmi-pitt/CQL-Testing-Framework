@@ -71,12 +71,39 @@ define "Hyponatremia Condition Risk Valuesets":
 define "SSRIs and SNRIs":
   exists(C3F.ActiveMedicationStatement([MedicationStatement: "SSRIs and SNRIs VS"]))
 
+define "Report SSRIs and SNRIs":
+  C3F.ActiveMedicationStatement([MedicationStatement: "SSRIs and SNRIs VS"]) S
+  return {
+    Type:  'Statement',
+    Name:  RF.ConceptText(S.medication as FHIR.CodeableConcept),
+    Start: RF.MedicationStatementDate(S),
+    End:   RF.DateTimeText((S.effective as FHIR.Period)."end"),
+    Status: S.status.value
+  }
+  sort by Start desc, End desc
+
 define "Thiazide and Thiazide like Diuretics":
   exists(C3F.ActiveMedicationStatement([MedicationStatement: "Thiazide and Thiazide like Diuretics VS"]))
+
+define "Report Thiazide and Thiazide like Diuretics":
+  C3F.ActiveMedicationStatement([MedicationStatement: "Thiazide and Thiazide like Diuretics VS"]) S
+  return {
+    Type:  'Statement',
+    Name:  RF.ConceptText(S.medication as FHIR.CodeableConcept),
+    Start: RF.MedicationStatementDate(S),
+    End:   RF.DateTimeText((S.effective as FHIR.Period)."end"),
+    Status: S.status.value
+  }
+  sort by Start desc, End desc
 
 define "Sodium Concentration <130 mmol/L":
   C3F.HighestObservation(C3F.ObservationLookBack([Observation: "Sodium Concentration Lab Measurements VS"], 7 days)) < 130 'mmol/L'
 
+define "Report Highest Sodium Concentration":
+  C3F.HighestObservation(C3F.ObservationLookBack([Observation: "Sodium Concentration Lab Measurements VS"], 7 days)) O
+  return {
+    Value: C3F.HighestObservation(C3F.ObservationLookBack([Observation: "Sodium Concentration Lab Measurements VS"], 7 days))
+  }
 
 define "General Risk Factor Age >=65":
   AgeInYears() >= 65
@@ -87,8 +114,29 @@ define "General Risk Factor Female":
 define "Hyponatremia Risk Drugs":
   exists(C3F.ActiveMedicationStatement("Hyponatremia Drug Risk Valuesets"))
 
+define "Report Hyponatremia Risk Drugs":
+  C3F.ActiveMedicationStatement("Hyponatremia Drug Risk Valuesets") S
+  return {
+    Type:  'Statement',
+    Name:  RF.ConceptText(S.medication as FHIR.CodeableConcept),
+    Start: RF.MedicationStatementDate(S),
+    End:   RF.DateTimeText((S.effective as FHIR.Period)."end"),
+    Status: S.status.value
+  }
+  sort by Start desc, End desc
+
 define "Hyponatremia Risk Conditions":
-  exists("Hyponatremia Condition Risk Valuesets")
+  exists(C3F.Confirmed(C3F.ActiveOrRecurring([Condition: "Hyponatremia Condition Risk Valuesets"])))
+
+define "Report Hyponatremia Risk Conditions":
+  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: "Hyponatremia Condition Risk Valuesets"])) C
+  return {
+    Name:  RF.ConceptText(C.code),
+    Status:    C.clinicalStatus.value,
+    Onset: RF.Onset(C),
+    DateRecorded: RF.DateTimeText(C.assertedDate)
+  }
+  sort by (Onset as String) desc
 
 define "No Recent Low Sodium Concentration":
   not("Sodium Concentration <130 mmol/L")
@@ -184,3 +232,31 @@ define "Indicator":
   else null
 define "Errors":
   null
+
+define Summary: {
+  Patient: {
+    Name: Combine(Patient.name.given G return G.value, ' ') + ' ' + Combine(Patient.name.family F return F.value, ' '),
+    Gender: Patient.gender.value,
+    Age: AgeInYears()
+  },
+  HistoricalTreatments: {
+    SSRIsSNRIs: "Report SSRIs and SNRIs",
+    Thiazides: "Report Thiazide and Thiazide like Diuretics",
+    HighestSodiumConcentration: "Report Highest Sodium Concentration"
+  },
+  GeneralRiskFactors: {
+    Is65orOlder: "General Risk Factor Age >=65",
+    IsFemale: "General Risk Factor Female"
+  },
+  RiskFactorsForHyponatremia: {
+    GastrointestinalBleeding: "Report GI Bleeding",
+    MedicationRiskFactors: "Report Hyponatremia Risk Medications",
+    ConditionRiskFactors: "Report Hyponatremia Risk Conditions"
+  },
+  Alert: {
+    Recommendation: "Recommendation",
+    Rationale: "Rationale",
+    Classification: "Classification",
+    Indicator: "Indicator"
+  }
+}
