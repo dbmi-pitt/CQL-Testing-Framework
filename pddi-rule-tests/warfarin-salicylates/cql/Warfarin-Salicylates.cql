@@ -9,6 +9,9 @@ include CDS_Connect_Commons_for_FHIRv300 version '1.1.0' called C3F
 
 include ReusableFunctions_FHIRv300 version '1.0.0' called RF
 
+include "CDS_Connect_Conversions" version '1' called Convert 
+
+
 codesystem "RXNORM": 'http://www.nlm.nih.gov/research/umls/rxnorm'
 codesystem "ICD9D": 'http://hl7.org/fhir/sid/icd-9-cm/diagnosis'
 
@@ -65,9 +68,9 @@ define "Report Non-Acetylated Salicylates":
         Ingredient: RF.ConceptText(M.ingredient[0].item as FHIR.CodeableConcept), // TODO deal with potentially more than one ingredient
         // Numerator: M.ingredient[0].amount.numerator.value.value,
         // Denominator: M.ingredient[0].amount.denominator.value.value,
-        Amount: M.ingredient[0].amount.numerator.value.value / M.ingredient[0].amount.denominator.value.value,
+        // Amount: M.ingredient[0].amount.numerator.value.value / M.ingredient[0].amount.denominator.value.value,
         Dosage: "Non-Acetylated Salicylates".dosage[0].timing.repeat.frequency.value,
-        DailyDosage: System.Quantity { value: [MedicationStatement: "Non Acetylated Salicylates VS"].dosage[0].dose.value * [MedicationStatement: "Non Acetylated Salicylates VS"].dosage[0].timing.repeat.frequency.value, unit: 'mg/d' } 
+        DailyDosage: System.Quantity { value: [MedicationStatement: "Non-Acetylated Salicylates VS"].dosage[0].dose.value * [MedicationStatement: "Non-Acetylated Salicylates VS"].dosage[0].timing.repeat.frequency.value, unit: 'mg/d' } 
       }
       sort by Start desc, End desc
 
@@ -129,7 +132,7 @@ define "Warfarin - Non-Acetylated Salicylates":
 
 // BOOLEAN FOR IF ANY HIGH DOSAGE EXISTS
 define "Non-Acetylated Salicylate dose >= 3 grams/day":
-  System.Quantity { value: [MedicationStatement: "Non Acetylated Salicylates VS"].dosage[0].dose.value * [MedicationStatement: "Non Acetylated Salicylates VS"].dosage[0].timing.repeat.frequency.value, unit: 'mg/d' } >= 3 'mg/d'
+  System.Quantity { value: [MedicationStatement: "Non-Acetylated Salicylates VS"].dosage[0].dose.value * [MedicationStatement: "Non-Acetylated Salicylates VS"].dosage[0].timing.repeat.frequency.value, unit: 'mg/d' } >= 3 'mg/d'
 
 define "Non-Acetylated Salicylate dose < 3 grams/day":
   not exists("Non-Acetylated Salicylate dose >= 3 grams/day")
