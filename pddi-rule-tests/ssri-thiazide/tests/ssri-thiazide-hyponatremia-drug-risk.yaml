@@ -1,0 +1,70 @@
+---
+name: SSRI Thiazide without low sodium with hyponatremia drug risk
+
+data:
+-
+	resourceType: Patient
+	name: Fuller Jackson
+	gender: male
+	birthDate: 1955-02-16
+-
+	resourceType: MedicationStatement
+	code: RXNORM#794947 Sertraline 150 MG Oral Tablet
+	effectiveDateTime: 2019-07-30T00:00:00.000+00:00
+-
+	resourceType: MedicationStatement
+	code: RXNORM#197499 Chlorthalidone 25 MG Oral Tablet
+	effectiveDateTime: 2019-08-31T00:00:00.000+00:00
+-
+	resourceType: Observation
+	code: LOINC#2947-0 Sodium [Moles/volume] in Blood
+	valueQuantity: 140 mmol/L
+	issued: 2019-09-15T00:00:00.000+00:00
+-
+	resourceType: MedicationStatement
+	code: RXNORM#834348 amiodarone hydrochloride 400 MG Oral Tablet
+	effectiveDateTime: 2019-08-15T00:00:00.000+00:00
+
+results:
+	Summary:
+		Patient:
+			Name: Fuller Jackson
+			Gender: male
+			Age: 64
+		HistoricalTreatments:
+			SSRIsSNRIs:
+			-
+				Type: Statement
+				Name: Sertraline 150 MG Oral Tablet
+				Start: '2019-07-30T00:00:00.000+00:00'
+				End: null
+				Status: active
+			Thiazides:
+			-
+				Type: Statement
+				Name: Chlorthalidone 25 MG Oral Tablet
+				Start: '2019-08-31T00:00:00.000+00:00'
+				End: null
+				Status: active
+			HighestSodiumConcentration:
+			-
+				Name: Sodium [Moles/volume] in Blood
+				Result: 140 mmol/L
+				Date: '2019-09-15T00:00:00.000+00:00'
+		GeneralRiskFactors:
+			Is65orOlder: false
+			IsFemale: false
+		RiskFactorsForHyponatremia:
+			MedicationRiskFactors:
+			-
+				Type: Statement
+				Name: amiodarone hydrochloride 400 MG Oral Tablet
+				Start: '2019-08-15T00:00:00.000+00:00'
+				End: null
+				Status: active
+			ConditionRiskFactors: null
+		Alert:
+			Recommendation: 'Consider alternative. If combination is used, monitor serum sodium'
+			Rationale: 'Likely increased risk of hyponatremia'
+			Classification: 'Minimize Risk'
+			Indicator: 'warning'
