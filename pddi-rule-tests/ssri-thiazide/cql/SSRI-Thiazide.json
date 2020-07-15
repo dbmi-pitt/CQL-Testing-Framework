@@ -1,0 +1,2073 @@
+{
+   "library" : {
+      "identifier" : {
+         "id" : "SSRI-and-Thiazide",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "3.0.0"
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "3.0.0"
+         }, {
+            "localIdentifier" : "C3F",
+            "path" : "CDS_Connect_Commons_for_FHIRv300",
+            "version" : "1.1.0"
+         }, {
+            "localIdentifier" : "RF",
+            "path" : "ReusableFunctions_FHIRv300",
+            "version" : "1.0.0"
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "name" : "SSRIs and SNRIs VS",
+            "id" : "2.16.840.1.113762.1.4.1213.33",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Thiazide and Thiazide like Diuretics VS",
+            "id" : "2.16.840.1.113762.1.4.1213.61",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Sodium Concentration Lab Measurements VS",
+            "id" : "2.16.840.1.113762.1.4.1213.80",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Amiodarones VS",
+            "id" : "2.16.840.1.113762.1.4.1213.81",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "ACEis and ARBs VS",
+            "id" : "2.16.840.1.113762.1.4.1213.11",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "NSAIDs VS",
+            "id" : "2.16.840.1.113762.1.4.1213.9",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Antineoplastics VS",
+            "id" : "2.16.840.1.113762.1.4.1213.62",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Antiepileptics VS",
+            "id" : "2.16.840.1.113762.1.4.1213.56",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Risperidones VS",
+            "id" : "2.16.840.1.113762.1.4.1213.60",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Quetiapines VS",
+            "id" : "2.16.840.1.113762.1.4.1213.59",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Haloperidols VS",
+            "id" : "2.16.840.1.113762.1.4.1213.63",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of HIV/AIDS ICD10CM VS",
+            "id" : "2.16.840.1.113762.1.4.1213.72",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of HIV/AIDS SNOMED VS",
+            "id" : "2.16.840.1.113762.1.4.1213.73",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Adrenal Insufficiency ICD10CM VS",
+            "id" : "2.16.840.1.113762.1.4.1213.65",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Adrenal Insufficiency SNOMED VS",
+            "id" : "2.16.840.1.113762.1.4.1213.66",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Adrenal Insufficiency ICD9CM VS",
+            "id" : "2.16.840.1.113762.1.4.1213.64",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Heart Failure ICD9CM VS",
+            "id" : "2.16.840.1.113762.1.4.1213.67",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Heart Failure SNOMED VS",
+            "id" : "2.16.840.1.113762.1.4.1213.68",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Hepatic Cirrhosis ICD10CM VS",
+            "id" : "2.16.840.1.113762.1.4.1213.70",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Hepatic Cirrhosis SNOMED VS",
+            "id" : "2.16.840.1.113762.1.4.1213.71",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Hepatic Cirrhosis ICD9CM VS",
+            "id" : "2.16.840.1.113762.1.4.1213.69",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Malignancy ICD10CM VS",
+            "id" : "2.16.840.1.113762.1.4.1213.75",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Malignancy SNOMED VS",
+            "id" : "2.16.840.1.113762.1.4.1213.76",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Malignancy ICD9CM VS",
+            "id" : "2.16.840.1.113762.1.4.1213.74",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Pneumonia ICD9CM VS",
+            "id" : "2.16.840.1.113762.1.4.1213.78",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Pneumonia SNOMED VS",
+            "id" : "2.16.840.1.113762.1.4.1213.79",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "History of Pneumonia ICD10CM VS",
+            "id" : "2.16.840.1.113762.1.4.1213.77",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Hyponatremia Drug Risk Valuesets",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Union",
+               "operand" : [ {
+                  "type" : "Union",
+                  "operand" : [ {
+                     "type" : "Union",
+                     "operand" : [ {
+                        "type" : "Union",
+                        "operand" : [ {
+                           "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                           "codeProperty" : "medication",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "name" : "Amiodarones VS",
+                              "type" : "ValueSetRef"
+                           }
+                        }, {
+                           "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                           "codeProperty" : "medication",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "name" : "ACEis and ARBs VS",
+                              "type" : "ValueSetRef"
+                           }
+                        } ]
+                     }, {
+                        "type" : "Union",
+                        "operand" : [ {
+                           "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                           "codeProperty" : "medication",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "name" : "NSAIDs VS",
+                              "type" : "ValueSetRef"
+                           }
+                        }, {
+                           "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                           "codeProperty" : "medication",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "name" : "Antineoplastics VS",
+                              "type" : "ValueSetRef"
+                           }
+                        } ]
+                     } ]
+                  }, {
+                     "type" : "Union",
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                        "codeProperty" : "medication",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Antiepileptics VS",
+                           "type" : "ValueSetRef"
+                        }
+                     }, {
+                        "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                        "codeProperty" : "medication",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Risperidones VS",
+                           "type" : "ValueSetRef"
+                        }
+                     } ]
+                  } ]
+               }, {
+                  "type" : "Union",
+                  "operand" : [ {
+                     "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                     "codeProperty" : "medication",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Quetiapines VS",
+                        "type" : "ValueSetRef"
+                     }
+                  }, {
+                     "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                     "codeProperty" : "medication",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Haloperidols VS",
+                        "type" : "ValueSetRef"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "name" : "Hyponatremia Condition Risk Valuesets",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Union",
+               "operand" : [ {
+                  "type" : "Union",
+                  "operand" : [ {
+                     "type" : "Union",
+                     "operand" : [ {
+                        "type" : "Union",
+                        "operand" : [ {
+                           "type" : "Union",
+                           "operand" : [ {
+                              "type" : "Union",
+                              "operand" : [ {
+                                 "type" : "Union",
+                                 "operand" : [ {
+                                    "type" : "Union",
+                                    "operand" : [ {
+                                       "dataType" : "{http://hl7.org/fhir}Condition",
+                                       "codeProperty" : "code",
+                                       "type" : "Retrieve",
+                                       "codes" : {
+                                          "name" : "History of HIV/AIDS ICD10CM VS",
+                                          "type" : "ValueSetRef"
+                                       }
+                                    }, {
+                                       "dataType" : "{http://hl7.org/fhir}Condition",
+                                       "codeProperty" : "code",
+                                       "type" : "Retrieve",
+                                       "codes" : {
+                                          "name" : "History of HIV/AIDS SNOMED VS",
+                                          "type" : "ValueSetRef"
+                                       }
+                                    } ]
+                                 }, {
+                                    "type" : "Union",
+                                    "operand" : [ {
+                                       "dataType" : "{http://hl7.org/fhir}Condition",
+                                       "codeProperty" : "code",
+                                       "type" : "Retrieve",
+                                       "codes" : {
+                                          "name" : "History of Adrenal Insufficiency ICD10CM VS",
+                                          "type" : "ValueSetRef"
+                                       }
+                                    }, {
+                                       "dataType" : "{http://hl7.org/fhir}Condition",
+                                       "codeProperty" : "code",
+                                       "type" : "Retrieve",
+                                       "codes" : {
+                                          "name" : "History of Adrenal Insufficiency SNOMED VS",
+                                          "type" : "ValueSetRef"
+                                       }
+                                    } ]
+                                 } ]
+                              }, {
+                                 "type" : "Union",
+                                 "operand" : [ {
+                                    "dataType" : "{http://hl7.org/fhir}Condition",
+                                    "codeProperty" : "code",
+                                    "type" : "Retrieve",
+                                    "codes" : {
+                                       "name" : "History of Adrenal Insufficiency ICD9CM VS",
+                                       "type" : "ValueSetRef"
+                                    }
+                                 }, {
+                                    "dataType" : "{http://hl7.org/fhir}Condition",
+                                    "codeProperty" : "code",
+                                    "type" : "Retrieve",
+                                    "codes" : {
+                                       "name" : "History of Heart Failure ICD9CM VS",
+                                       "type" : "ValueSetRef"
+                                    }
+                                 } ]
+                              } ]
+                           }, {
+                              "type" : "Union",
+                              "operand" : [ {
+                                 "dataType" : "{http://hl7.org/fhir}Condition",
+                                 "codeProperty" : "code",
+                                 "type" : "Retrieve",
+                                 "codes" : {
+                                    "name" : "History of Heart Failure SNOMED VS",
+                                    "type" : "ValueSetRef"
+                                 }
+                              }, {
+                                 "dataType" : "{http://hl7.org/fhir}Condition",
+                                 "codeProperty" : "code",
+                                 "type" : "Retrieve",
+                                 "codes" : {
+                                    "name" : "History of Hepatic Cirrhosis ICD10CM VS",
+                                    "type" : "ValueSetRef"
+                                 }
+                              } ]
+                           } ]
+                        }, {
+                           "type" : "Union",
+                           "operand" : [ {
+                              "dataType" : "{http://hl7.org/fhir}Condition",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "name" : "History of Hepatic Cirrhosis SNOMED VS",
+                                 "type" : "ValueSetRef"
+                              }
+                           }, {
+                              "dataType" : "{http://hl7.org/fhir}Condition",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "name" : "History of Hepatic Cirrhosis ICD9CM VS",
+                                 "type" : "ValueSetRef"
+                              }
+                           } ]
+                        } ]
+                     }, {
+                        "type" : "Union",
+                        "operand" : [ {
+                           "dataType" : "{http://hl7.org/fhir}Condition",
+                           "codeProperty" : "code",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "name" : "History of Malignancy ICD10CM VS",
+                              "type" : "ValueSetRef"
+                           }
+                        }, {
+                           "dataType" : "{http://hl7.org/fhir}Condition",
+                           "codeProperty" : "code",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "name" : "History of Malignancy SNOMED VS",
+                              "type" : "ValueSetRef"
+                           }
+                        } ]
+                     } ]
+                  }, {
+                     "type" : "Union",
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}Condition",
+                        "codeProperty" : "code",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "History of Malignancy ICD9CM VS",
+                           "type" : "ValueSetRef"
+                        }
+                     }, {
+                        "dataType" : "{http://hl7.org/fhir}Condition",
+                        "codeProperty" : "code",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "History of Pneumonia ICD9CM VS",
+                           "type" : "ValueSetRef"
+                        }
+                     } ]
+                  } ]
+               }, {
+                  "type" : "Union",
+                  "operand" : [ {
+                     "dataType" : "{http://hl7.org/fhir}Condition",
+                     "codeProperty" : "code",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "History of Pneumonia SNOMED VS",
+                        "type" : "ValueSetRef"
+                     }
+                  }, {
+                     "dataType" : "{http://hl7.org/fhir}Condition",
+                     "codeProperty" : "code",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "History of Pneumonia ICD10CM VS",
+                        "type" : "ValueSetRef"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "name" : "SSRIs and SNRIs",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Exists",
+               "operand" : {
+                  "name" : "ActiveMedicationStatement",
+                  "libraryName" : "C3F",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                     "codeProperty" : "medication",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "SSRIs and SNRIs VS",
+                        "type" : "ValueSetRef"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "name" : "Report SSRIs and SNRIs",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "S",
+                  "expression" : {
+                     "name" : "ActiveMedicationStatement",
+                     "libraryName" : "C3F",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                        "codeProperty" : "medication",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "SSRIs and SNRIs VS",
+                           "type" : "ValueSetRef"
+                        }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "expression" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "Type",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Statement",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "Name",
+                        "value" : {
+                           "name" : "ConceptText",
+                           "libraryName" : "RF",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "strict" : false,
+                              "type" : "As",
+                              "operand" : {
+                                 "path" : "medication",
+                                 "scope" : "S",
+                                 "type" : "Property"
+                              },
+                              "asTypeSpecifier" : {
+                                 "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "Start",
+                        "value" : {
+                           "name" : "MedicationStatementDate",
+                           "libraryName" : "RF",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "S",
+                              "type" : "AliasRef"
+                           } ]
+                        }
+                     }, {
+                        "name" : "End",
+                        "value" : {
+                           "name" : "DateTimeText",
+                           "libraryName" : "RF",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "end",
+                              "type" : "Property",
+                              "source" : {
+                                 "strict" : false,
+                                 "type" : "As",
+                                 "operand" : {
+                                    "path" : "effective",
+                                    "scope" : "S",
+                                    "type" : "Property"
+                                 },
+                                 "asTypeSpecifier" : {
+                                    "name" : "{http://hl7.org/fhir}Period",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "Status",
+                        "value" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "status",
+                              "scope" : "S",
+                              "type" : "Property"
+                           }
+                        }
+                     } ]
+                  }
+               },
+               "sort" : {
+                  "by" : [ {
+                     "direction" : "desc",
+                     "path" : "Start",
+                     "type" : "ByColumn"
+                  }, {
+                     "direction" : "desc",
+                     "path" : "End",
+                     "type" : "ByColumn"
+                  } ]
+               }
+            }
+         }, {
+            "name" : "Thiazide and Thiazide like Diuretics",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Exists",
+               "operand" : {
+                  "name" : "ActiveMedicationStatement",
+                  "libraryName" : "C3F",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                     "codeProperty" : "medication",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Thiazide and Thiazide like Diuretics VS",
+                        "type" : "ValueSetRef"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "name" : "Report Thiazide and Thiazide like Diuretics",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "S",
+                  "expression" : {
+                     "name" : "ActiveMedicationStatement",
+                     "libraryName" : "C3F",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}MedicationStatement",
+                        "codeProperty" : "medication",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Thiazide and Thiazide like Diuretics VS",
+                           "type" : "ValueSetRef"
+                        }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "expression" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "Type",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Statement",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "Name",
+                        "value" : {
+                           "name" : "ConceptText",
+                           "libraryName" : "RF",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "strict" : false,
+                              "type" : "As",
+                              "operand" : {
+                                 "path" : "medication",
+                                 "scope" : "S",
+                                 "type" : "Property"
+                              },
+                              "asTypeSpecifier" : {
+                                 "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "Start",
+                        "value" : {
+                           "name" : "MedicationStatementDate",
+                           "libraryName" : "RF",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "S",
+                              "type" : "AliasRef"
+                           } ]
+                        }
+                     }, {
+                        "name" : "End",
+                        "value" : {
+                           "name" : "DateTimeText",
+                           "libraryName" : "RF",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "end",
+                              "type" : "Property",
+                              "source" : {
+                                 "strict" : false,
+                                 "type" : "As",
+                                 "operand" : {
+                                    "path" : "effective",
+                                    "scope" : "S",
+                                    "type" : "Property"
+                                 },
+                                 "asTypeSpecifier" : {
+                                    "name" : "{http://hl7.org/fhir}Period",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "Status",
+                        "value" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "status",
+                              "scope" : "S",
+                              "type" : "Property"
+                           }
+                        }
+                     } ]
+                  }
+               },
+               "sort" : {
+                  "by" : [ {
+                     "direction" : "desc",
+                     "path" : "Start",
+                     "type" : "ByColumn"
+                  }, {
+                     "direction" : "desc",
+                     "path" : "End",
+                     "type" : "ByColumn"
+                  } ]
+               }
+            }
+         }, {
+            "name" : "Sodium Concentration <130 mmol/L",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Less",
+               "operand" : [ {
+                  "name" : "HighestObservation",
+                  "libraryName" : "C3F",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "name" : "ObservationLookBack",
+                     "libraryName" : "C3F",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}Observation",
+                        "codeProperty" : "code",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "Sodium Concentration Lab Measurements VS",
+                           "type" : "ValueSetRef"
+                        }
+                     }, {
+                        "value" : 7,
+                        "unit" : "days",
+                        "type" : "Quantity"
+                     } ]
+                  } ]
+               }, {
+                  "value" : 130,
+                  "unit" : "mmol/L",
+                  "type" : "Quantity"
+               } ]
+            }
+         }, {
+            "name" : "Report Highest Sodium Concentration",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "O",
+                  "expression" : {
+                     "name" : "HighestObservation",
+                     "libraryName" : "C3F",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "name" : "ObservationLookBack",
+                        "libraryName" : "C3F",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "dataType" : "{http://hl7.org/fhir}Observation",
+                           "codeProperty" : "code",
+                           "type" : "Retrieve",
+                           "codes" : {
+                              "name" : "Sodium Concentration Lab Measurements VS",
+                              "type" : "ValueSetRef"
+                           }
+                        }, {
+                           "value" : 7,
+                           "unit" : "days",
+                           "type" : "Quantity"
+                        } ]
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "expression" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "Value",
+                        "value" : {
+                           "name" : "HighestObservation",
+                           "libraryName" : "C3F",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "ObservationLookBack",
+                              "libraryName" : "C3F",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "dataType" : "{http://hl7.org/fhir}Observation",
+                                 "codeProperty" : "code",
+                                 "type" : "Retrieve",
+                                 "codes" : {
+                                    "name" : "Sodium Concentration Lab Measurements VS",
+                                    "type" : "ValueSetRef"
+                                 }
+                              }, {
+                                 "value" : 7,
+                                 "unit" : "days",
+                                 "type" : "Quantity"
+                              } ]
+                           } ]
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "name" : "General Risk Factor Age >=65",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "GreaterOrEqual",
+               "operand" : [ {
+                  "precision" : "Year",
+                  "type" : "CalculateAge",
+                  "operand" : {
+                     "path" : "birthDate.value",
+                     "type" : "Property",
+                     "source" : {
+                        "name" : "Patient",
+                        "type" : "ExpressionRef"
+                     }
+                  }
+               }, {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "65",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "name" : "General Risk Factor Female",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Equal",
+               "operand" : [ {
+                  "path" : "value",
+                  "type" : "Property",
+                  "source" : {
+                     "path" : "gender",
+                     "type" : "Property",
+                     "source" : {
+                        "name" : "Patient",
+                        "type" : "ExpressionRef"
+                     }
+                  }
+               }, {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "female",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "name" : "Hyponatremia Risk Drugs",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Exists",
+               "operand" : {
+                  "name" : "ActiveMedicationStatement",
+                  "libraryName" : "C3F",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "name" : "Hyponatremia Drug Risk Valuesets",
+                     "type" : "ExpressionRef"
+                  } ]
+               }
+            }
+         }, {
+            "name" : "Report Hyponatremia Risk Drugs",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "S",
+                  "expression" : {
+                     "name" : "ActiveMedicationStatement",
+                     "libraryName" : "C3F",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "name" : "Hyponatremia Drug Risk Valuesets",
+                        "type" : "ExpressionRef"
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "expression" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "Type",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Statement",
+                           "type" : "Literal"
+                        }
+                     }, {
+                        "name" : "Name",
+                        "value" : {
+                           "name" : "ConceptText",
+                           "libraryName" : "RF",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "strict" : false,
+                              "type" : "As",
+                              "operand" : {
+                                 "path" : "medication",
+                                 "scope" : "S",
+                                 "type" : "Property"
+                              },
+                              "asTypeSpecifier" : {
+                                 "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "Start",
+                        "value" : {
+                           "name" : "MedicationStatementDate",
+                           "libraryName" : "RF",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "S",
+                              "type" : "AliasRef"
+                           } ]
+                        }
+                     }, {
+                        "name" : "End",
+                        "value" : {
+                           "name" : "DateTimeText",
+                           "libraryName" : "RF",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "end",
+                              "type" : "Property",
+                              "source" : {
+                                 "strict" : false,
+                                 "type" : "As",
+                                 "operand" : {
+                                    "path" : "effective",
+                                    "scope" : "S",
+                                    "type" : "Property"
+                                 },
+                                 "asTypeSpecifier" : {
+                                    "name" : "{http://hl7.org/fhir}Period",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "Status",
+                        "value" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "status",
+                              "scope" : "S",
+                              "type" : "Property"
+                           }
+                        }
+                     } ]
+                  }
+               },
+               "sort" : {
+                  "by" : [ {
+                     "direction" : "desc",
+                     "path" : "Start",
+                     "type" : "ByColumn"
+                  }, {
+                     "direction" : "desc",
+                     "path" : "End",
+                     "type" : "ByColumn"
+                  } ]
+               }
+            }
+         }, {
+            "name" : "Hyponatremia Risk Conditions",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Exists",
+               "operand" : {
+                  "name" : "Confirmed",
+                  "libraryName" : "C3F",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "name" : "ActiveOrRecurring",
+                     "libraryName" : "C3F",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "name" : "Hyponatremia Condition Risk Valuesets",
+                        "type" : "ExpressionRef"
+                     } ]
+                  } ]
+               }
+            }
+         }, {
+            "name" : "Report Hyponatremia Risk Conditions",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Query",
+               "source" : [ {
+                  "alias" : "C",
+                  "expression" : {
+                     "name" : "Confirmed",
+                     "libraryName" : "C3F",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "name" : "ActiveOrRecurring",
+                        "libraryName" : "C3F",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "name" : "Hyponatremia Condition Risk Valuesets",
+                           "type" : "ExpressionRef"
+                        } ]
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "expression" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "Name",
+                        "value" : {
+                           "name" : "ConceptText",
+                           "libraryName" : "RF",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "code",
+                              "scope" : "C",
+                              "type" : "Property"
+                           } ]
+                        }
+                     }, {
+                        "name" : "Status",
+                        "value" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "clinicalStatus",
+                              "scope" : "C",
+                              "type" : "Property"
+                           }
+                        }
+                     }, {
+                        "name" : "Onset",
+                        "value" : {
+                           "name" : "Onset",
+                           "libraryName" : "RF",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "name" : "C",
+                              "type" : "AliasRef"
+                           } ]
+                        }
+                     }, {
+                        "name" : "DateRecorded",
+                        "value" : {
+                           "name" : "DateTimeText",
+                           "libraryName" : "RF",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "assertedDate",
+                              "scope" : "C",
+                              "type" : "Property"
+                           } ]
+                        }
+                     } ]
+                  }
+               },
+               "sort" : {
+                  "by" : [ {
+                     "direction" : "desc",
+                     "type" : "ByExpression",
+                     "expression" : {
+                        "strict" : false,
+                        "type" : "As",
+                        "operand" : {
+                           "name" : "Onset",
+                           "type" : "IdentifierRef"
+                        },
+                        "asTypeSpecifier" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "name" : "No Recent Low Sodium Concentration",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Not",
+               "operand" : {
+                  "name" : "Sodium Concentration <130 mmol/L",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "name" : "No General Risk Factor Age >=65",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Not",
+               "operand" : {
+                  "name" : "General Risk Factor Age >=65",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "name" : "No General Risk Factor Female",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Not",
+               "operand" : {
+                  "name" : "General Risk Factor Female",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "name" : "No Hyponatremia Risk Drugs",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Not",
+               "operand" : {
+                  "name" : "Hyponatremia Risk Drugs",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "name" : "No Hyponatremia Risk Conditions",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Not",
+               "operand" : {
+                  "name" : "Hyponatremia Risk Conditions",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "name" : "MeetsInclusionCriteria",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "And",
+               "operand" : [ {
+                  "name" : "SSRIs and SNRIs",
+                  "type" : "ExpressionRef"
+               }, {
+                  "name" : "Thiazide and Thiazide like Diuretics",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "name" : "InPopulation",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "name" : "MeetsInclusionCriteria",
+               "type" : "ExpressionRef"
+            }
+         }, {
+            "name" : "Low Sodium Concentration",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Not",
+                     "operand" : {
+                        "type" : "IsTrue",
+                        "operand" : {
+                           "name" : "InPopulation",
+                           "type" : "ExpressionRef"
+                        }
+                     }
+                  }
+               },
+               "then" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Null"
+                  }
+               },
+               "else" : {
+                  "name" : "Sodium Concentration <130 mmol/L",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "name" : "Not Low Sodium Concentration",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Not",
+                     "operand" : {
+                        "type" : "IsTrue",
+                        "operand" : {
+                           "name" : "InPopulation",
+                           "type" : "ExpressionRef"
+                        }
+                     }
+                  }
+               },
+               "then" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Null"
+                  }
+               },
+               "else" : {
+                  "name" : "No Recent Low Sodium Concentration",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "name" : "Yes General Risks",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Not",
+                     "operand" : {
+                        "type" : "IsTrue",
+                        "operand" : {
+                           "name" : "InPopulation",
+                           "type" : "ExpressionRef"
+                        }
+                     }
+                  }
+               },
+               "then" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Null"
+                  }
+               },
+               "else" : {
+                  "type" : "Or",
+                  "operand" : [ {
+                     "name" : "General Risk Factor Age >=65",
+                     "type" : "ExpressionRef"
+                  }, {
+                     "name" : "General Risk Factor Female",
+                     "type" : "ExpressionRef"
+                  } ]
+               }
+            }
+         }, {
+            "name" : "No General Risks",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Not",
+                     "operand" : {
+                        "type" : "IsTrue",
+                        "operand" : {
+                           "name" : "InPopulation",
+                           "type" : "ExpressionRef"
+                        }
+                     }
+                  }
+               },
+               "then" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Null"
+                  }
+               },
+               "else" : {
+                  "type" : "And",
+                  "operand" : [ {
+                     "name" : "No General Risk Factor Age >=65",
+                     "type" : "ExpressionRef"
+                  }, {
+                     "name" : "No General Risk Factor Female",
+                     "type" : "ExpressionRef"
+                  } ]
+               }
+            }
+         }, {
+            "name" : "Yes Hyponatremia Risks",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Not",
+                     "operand" : {
+                        "type" : "IsTrue",
+                        "operand" : {
+                           "name" : "InPopulation",
+                           "type" : "ExpressionRef"
+                        }
+                     }
+                  }
+               },
+               "then" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Null"
+                  }
+               },
+               "else" : {
+                  "type" : "Or",
+                  "operand" : [ {
+                     "name" : "Hyponatremia Risk Drugs",
+                     "type" : "ExpressionRef"
+                  }, {
+                     "name" : "Hyponatremia Risk Conditions",
+                     "type" : "ExpressionRef"
+                  } ]
+               }
+            }
+         }, {
+            "name" : "No Hyponatremia Risks",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Not",
+                     "operand" : {
+                        "type" : "IsTrue",
+                        "operand" : {
+                           "name" : "InPopulation",
+                           "type" : "ExpressionRef"
+                        }
+                     }
+                  }
+               },
+               "then" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "type" : "Null"
+                  }
+               },
+               "else" : {
+                  "type" : "And",
+                  "operand" : [ {
+                     "name" : "No Hyponatremia Risk Drugs",
+                     "type" : "ExpressionRef"
+                  }, {
+                     "name" : "No Hyponatremia Risk Conditions",
+                     "type" : "ExpressionRef"
+                  } ]
+               }
+            }
+         }, {
+            "name" : "Recommendation",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "name" : "Low Sodium Concentration",
+                     "type" : "ExpressionRef"
+                  }
+               },
+               "then" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Avoid concurrent if possible. If combination is used, monitor serum sodium",
+                  "type" : "Literal"
+               },
+               "else" : {
+                  "type" : "If",
+                  "condition" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "operand" : {
+                        "type" : "And",
+                        "operand" : [ {
+                           "name" : "Not Low Sodium Concentration",
+                           "type" : "ExpressionRef"
+                        }, {
+                           "name" : "Yes General Risks",
+                           "type" : "ExpressionRef"
+                        } ]
+                     }
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Consider alternative. If combination is used, monitor serum sodium",
+                     "type" : "Literal"
+                  },
+                  "else" : {
+                     "type" : "If",
+                     "condition" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "type" : "And",
+                              "operand" : [ {
+                                 "name" : "Not Low Sodium Concentration",
+                                 "type" : "ExpressionRef"
+                              }, {
+                                 "name" : "No General Risks",
+                                 "type" : "ExpressionRef"
+                              } ]
+                           }, {
+                              "name" : "Yes Hyponatremia Risks",
+                              "type" : "ExpressionRef"
+                           } ]
+                        }
+                     },
+                     "then" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Consider alternative. If combination is used, monitor serum sodium",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "type" : "If",
+                        "condition" : {
+                           "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "As",
+                           "operand" : {
+                              "type" : "And",
+                              "operand" : [ {
+                                 "type" : "And",
+                                 "operand" : [ {
+                                    "name" : "Not Low Sodium Concentration",
+                                    "type" : "ExpressionRef"
+                                 }, {
+                                    "name" : "No Hyponatremia Risks",
+                                    "type" : "ExpressionRef"
+                                 } ]
+                              }, {
+                                 "name" : "No General Risks",
+                                 "type" : "ExpressionRef"
+                              } ]
+                           }
+                        },
+                        "then" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "",
+                           "type" : "Literal"
+                        },
+                        "else" : {
+                           "asType" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "As",
+                           "operand" : {
+                              "type" : "Null"
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }, {
+            "name" : "Rationale",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "name" : "Low Sodium Concentration",
+                     "type" : "ExpressionRef"
+                  }
+               },
+               "then" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Substantial risk of hyponatremia",
+                  "type" : "Literal"
+               },
+               "else" : {
+                  "type" : "If",
+                  "condition" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "operand" : {
+                        "type" : "And",
+                        "operand" : [ {
+                           "name" : "Not Low Sodium Concentration",
+                           "type" : "ExpressionRef"
+                        }, {
+                           "name" : "Yes General Risks",
+                           "type" : "ExpressionRef"
+                        } ]
+                     }
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Increased risk of hyponatremia",
+                     "type" : "Literal"
+                  },
+                  "else" : {
+                     "type" : "If",
+                     "condition" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "type" : "And",
+                              "operand" : [ {
+                                 "name" : "Not Low Sodium Concentration",
+                                 "type" : "ExpressionRef"
+                              }, {
+                                 "name" : "No General Risks",
+                                 "type" : "ExpressionRef"
+                              } ]
+                           }, {
+                              "name" : "Yes Hyponatremia Risks",
+                              "type" : "ExpressionRef"
+                           } ]
+                        }
+                     },
+                     "then" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Likely increased risk of hyponatremia",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "If",
+                           "condition" : {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "type" : "And",
+                                 "operand" : [ {
+                                    "type" : "And",
+                                    "operand" : [ {
+                                       "name" : "Not Low Sodium Concentration",
+                                       "type" : "ExpressionRef"
+                                    }, {
+                                       "name" : "No Hyponatremia Risks",
+                                       "type" : "ExpressionRef"
+                                    } ]
+                                 }, {
+                                    "name" : "No General Risks",
+                                    "type" : "ExpressionRef"
+                                 } ]
+                              }
+                           },
+                           "then" : {
+                              "type" : "Null"
+                           },
+                           "else" : {
+                              "type" : "Null"
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }, {
+            "name" : "Classification",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "name" : "Low Sodium Concentration",
+                     "type" : "ExpressionRef"
+                  }
+               },
+               "then" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Avoid Combination",
+                  "type" : "Literal"
+               },
+               "else" : {
+                  "type" : "If",
+                  "condition" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "operand" : {
+                        "type" : "And",
+                        "operand" : [ {
+                           "name" : "Not Low Sodium Concentration",
+                           "type" : "ExpressionRef"
+                        }, {
+                           "name" : "Yes General Risks",
+                           "type" : "ExpressionRef"
+                        } ]
+                     }
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Usually Avoid Combination",
+                     "type" : "Literal"
+                  },
+                  "else" : {
+                     "type" : "If",
+                     "condition" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "type" : "And",
+                              "operand" : [ {
+                                 "name" : "Not Low Sodium Concentration",
+                                 "type" : "ExpressionRef"
+                              }, {
+                                 "name" : "No General Risks",
+                                 "type" : "ExpressionRef"
+                              } ]
+                           }, {
+                              "name" : "Yes Hyponatremia Risks",
+                              "type" : "ExpressionRef"
+                           } ]
+                        }
+                     },
+                     "then" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Minimize Risk",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "type" : "If",
+                        "condition" : {
+                           "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "As",
+                           "operand" : {
+                              "type" : "And",
+                              "operand" : [ {
+                                 "type" : "And",
+                                 "operand" : [ {
+                                    "name" : "Not Low Sodium Concentration",
+                                    "type" : "ExpressionRef"
+                                 }, {
+                                    "name" : "No Hyponatremia Risks",
+                                    "type" : "ExpressionRef"
+                                 } ]
+                              }, {
+                                 "name" : "No General Risks",
+                                 "type" : "ExpressionRef"
+                              } ]
+                           }
+                        },
+                        "then" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "No Special Precautions",
+                           "type" : "Literal"
+                        },
+                        "else" : {
+                           "asType" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "As",
+                           "operand" : {
+                              "type" : "Null"
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }, {
+            "name" : "Indicator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "If",
+               "condition" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "operand" : {
+                     "name" : "Low Sodium Concentration",
+                     "type" : "ExpressionRef"
+                  }
+               },
+               "then" : {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "critical",
+                  "type" : "Literal"
+               },
+               "else" : {
+                  "type" : "If",
+                  "condition" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "operand" : {
+                        "type" : "And",
+                        "operand" : [ {
+                           "name" : "Not Low Sodium Concentration",
+                           "type" : "ExpressionRef"
+                        }, {
+                           "name" : "Yes General Risks",
+                           "type" : "ExpressionRef"
+                        } ]
+                     }
+                  },
+                  "then" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "critical",
+                     "type" : "Literal"
+                  },
+                  "else" : {
+                     "type" : "If",
+                     "condition" : {
+                        "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "As",
+                        "operand" : {
+                           "type" : "And",
+                           "operand" : [ {
+                              "type" : "And",
+                              "operand" : [ {
+                                 "name" : "Not Low Sodium Concentration",
+                                 "type" : "ExpressionRef"
+                              }, {
+                                 "name" : "No General Risks",
+                                 "type" : "ExpressionRef"
+                              } ]
+                           }, {
+                              "name" : "Yes Hyponatremia Risks",
+                              "type" : "ExpressionRef"
+                           } ]
+                        }
+                     },
+                     "then" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "warning",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "type" : "If",
+                        "condition" : {
+                           "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "As",
+                           "operand" : {
+                              "type" : "And",
+                              "operand" : [ {
+                                 "type" : "And",
+                                 "operand" : [ {
+                                    "name" : "Not Low Sodium Concentration",
+                                    "type" : "ExpressionRef"
+                                 }, {
+                                    "name" : "No Hyponatremia Risks",
+                                    "type" : "ExpressionRef"
+                                 } ]
+                              }, {
+                                 "name" : "No General Risks",
+                                 "type" : "ExpressionRef"
+                              } ]
+                           }
+                        },
+                        "then" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "info",
+                           "type" : "Literal"
+                        },
+                        "else" : {
+                           "asType" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "As",
+                           "operand" : {
+                              "type" : "Null"
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }, {
+            "name" : "Errors",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Null"
+            }
+         }, {
+            "name" : "Summary",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Tuple",
+               "element" : [ {
+                  "name" : "Patient",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "Name",
+                        "value" : {
+                           "type" : "Concatenate",
+                           "operand" : [ {
+                              "type" : "Concatenate",
+                              "operand" : [ {
+                                 "type" : "Combine",
+                                 "source" : {
+                                    "type" : "Query",
+                                    "source" : [ {
+                                       "alias" : "G",
+                                       "expression" : {
+                                          "type" : "Flatten",
+                                          "operand" : {
+                                             "type" : "Query",
+                                             "source" : [ {
+                                                "alias" : "$this",
+                                                "expression" : {
+                                                   "path" : "name",
+                                                   "type" : "Property",
+                                                   "source" : {
+                                                      "name" : "Patient",
+                                                      "type" : "ExpressionRef"
+                                                   }
+                                                }
+                                             } ],
+                                             "where" : {
+                                                "type" : "Not",
+                                                "operand" : {
+                                                   "type" : "IsNull",
+                                                   "operand" : {
+                                                      "path" : "given",
+                                                      "type" : "Property",
+                                                      "source" : {
+                                                         "name" : "$this",
+                                                         "type" : "AliasRef"
+                                                      }
+                                                   }
+                                                }
+                                             },
+                                             "return" : {
+                                                "expression" : {
+                                                   "path" : "given",
+                                                   "type" : "Property",
+                                                   "source" : {
+                                                      "name" : "$this",
+                                                      "type" : "AliasRef"
+                                                   }
+                                                }
+                                             }
+                                          }
+                                       }
+                                    } ],
+                                    "relationship" : [ ],
+                                    "return" : {
+                                       "expression" : {
+                                          "path" : "value",
+                                          "scope" : "G",
+                                          "type" : "Property"
+                                       }
+                                    }
+                                 },
+                                 "separator" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : " ",
+                                    "type" : "Literal"
+                                 }
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : " ",
+                                 "type" : "Literal"
+                              } ]
+                           }, {
+                              "type" : "Combine",
+                              "source" : {
+                                 "type" : "Query",
+                                 "source" : [ {
+                                    "alias" : "F",
+                                    "expression" : {
+                                       "type" : "Query",
+                                       "source" : [ {
+                                          "alias" : "$this",
+                                          "expression" : {
+                                             "path" : "name",
+                                             "type" : "Property",
+                                             "source" : {
+                                                "name" : "Patient",
+                                                "type" : "ExpressionRef"
+                                             }
+                                          }
+                                       } ],
+                                       "where" : {
+                                          "type" : "Not",
+                                          "operand" : {
+                                             "type" : "IsNull",
+                                             "operand" : {
+                                                "path" : "family",
+                                                "type" : "Property",
+                                                "source" : {
+                                                   "name" : "$this",
+                                                   "type" : "AliasRef"
+                                                }
+                                             }
+                                          }
+                                       },
+                                       "return" : {
+                                          "expression" : {
+                                             "path" : "family",
+                                             "type" : "Property",
+                                             "source" : {
+                                                "name" : "$this",
+                                                "type" : "AliasRef"
+                                             }
+                                          }
+                                       }
+                                    }
+                                 } ],
+                                 "relationship" : [ ],
+                                 "return" : {
+                                    "expression" : {
+                                       "path" : "value",
+                                       "scope" : "F",
+                                       "type" : "Property"
+                                    }
+                                 }
+                              },
+                              "separator" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : " ",
+                                 "type" : "Literal"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "Gender",
+                        "value" : {
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "gender",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "Patient",
+                                 "type" : "ExpressionRef"
+                              }
+                           }
+                        }
+                     }, {
+                        "name" : "Age",
+                        "value" : {
+                           "precision" : "Year",
+                           "type" : "CalculateAge",
+                           "operand" : {
+                              "path" : "birthDate.value",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "Patient",
+                                 "type" : "ExpressionRef"
+                              }
+                           }
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "HistoricalTreatments",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "SSRIsSNRIs",
+                        "value" : {
+                           "name" : "Report SSRIs and SNRIs",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "Thiazides",
+                        "value" : {
+                           "name" : "Report Thiazide and Thiazide like Diuretics",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "HighestSodiumConcentration",
+                        "value" : {
+                           "name" : "Report Highest Sodium Concentration",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "GeneralRiskFactors",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "Is65orOlder",
+                        "value" : {
+                           "name" : "General Risk Factor Age >=65",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "IsFemale",
+                        "value" : {
+                           "name" : "General Risk Factor Female",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "RiskFactorsForHyponatremia",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "MedicationRiskFactors",
+                        "value" : {
+                           "name" : "Hyponatremia Risk Drugs",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "ConditionRiskFactors",
+                        "value" : {
+                           "name" : "Report Hyponatremia Risk Conditions",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "Alert",
+                  "value" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "Recommendation",
+                        "value" : {
+                           "name" : "Recommendation",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "Rationale",
+                        "value" : {
+                           "name" : "Rationale",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "Classification",
+                        "value" : {
+                           "name" : "Classification",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "name" : "Indicator",
+                        "value" : {
+                           "name" : "Indicator",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

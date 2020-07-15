@@ -1,4 +1,5 @@
 library "SSRI-and-Thiazide" version '1'
+// ./cql-to-elm/build/install/cql-to-elm/bin/cql-to-elm  --format=JSON --input /Users/erc53/Github/CQL-Testing-Framework/pddi-rule-tests/ssri-thiazide/cql/SSRI-Thiazide.cql   --output /Users/erc53/Github/CQL-Testing-Framework/pddi-rule-tests/ssri-thiazide/cql/
 
 using FHIR version '3.0.0'
 
@@ -72,7 +73,7 @@ define "SSRIs and SNRIs":
   exists(C3F.ActiveMedicationStatement([MedicationStatement: "SSRIs and SNRIs VS"]))
 
 define "Report SSRIs and SNRIs":
-  C3F.ActiveMedicationStatement([MedicationStatement: "SSRIs and SNRIs VS"]) S
+  (C3F.ActiveMedicationStatement([MedicationStatement: "SSRIs and SNRIs VS"])) S
   return {
     Type:  'Statement',
     Name:  RF.ConceptText(S.medication as FHIR.CodeableConcept),
@@ -86,7 +87,7 @@ define "Thiazide and Thiazide like Diuretics":
   exists(C3F.ActiveMedicationStatement([MedicationStatement: "Thiazide and Thiazide like Diuretics VS"]))
 
 define "Report Thiazide and Thiazide like Diuretics":
-  C3F.ActiveMedicationStatement([MedicationStatement: "Thiazide and Thiazide like Diuretics VS"]) S
+  (C3F.ActiveMedicationStatement([MedicationStatement: "Thiazide and Thiazide like Diuretics VS"])) S
   return {
     Type:  'Statement',
     Name:  RF.ConceptText(S.medication as FHIR.CodeableConcept),
@@ -100,7 +101,7 @@ define "Sodium Concentration <130 mmol/L":
   C3F.HighestObservation(C3F.ObservationLookBack([Observation: "Sodium Concentration Lab Measurements VS"], 7 days)) < 130 'mmol/L'
 
 define "Report Highest Sodium Concentration":
-  C3F.HighestObservation(C3F.ObservationLookBack([Observation: "Sodium Concentration Lab Measurements VS"], 7 days)) O
+  (C3F.HighestObservation(C3F.ObservationLookBack([Observation: "Sodium Concentration Lab Measurements VS"], 7 days))) O
   return {
     Value: C3F.HighestObservation(C3F.ObservationLookBack([Observation: "Sodium Concentration Lab Measurements VS"], 7 days))
   }
@@ -115,7 +116,7 @@ define "Hyponatremia Risk Drugs":
   exists(C3F.ActiveMedicationStatement("Hyponatremia Drug Risk Valuesets"))
 
 define "Report Hyponatremia Risk Drugs":
-  C3F.ActiveMedicationStatement("Hyponatremia Drug Risk Valuesets") S
+  (C3F.ActiveMedicationStatement("Hyponatremia Drug Risk Valuesets")) S
   return {
     Type:  'Statement',
     Name:  RF.ConceptText(S.medication as FHIR.CodeableConcept),
@@ -126,10 +127,10 @@ define "Report Hyponatremia Risk Drugs":
   sort by Start desc, End desc
 
 define "Hyponatremia Risk Conditions":
-  exists(C3F.Confirmed(C3F.ActiveOrRecurring([Condition: "Hyponatremia Condition Risk Valuesets"])))
+  exists(C3F.Confirmed(C3F.ActiveOrRecurring("Hyponatremia Condition Risk Valuesets")))
 
 define "Report Hyponatremia Risk Conditions":
-  C3F.Confirmed(C3F.ActiveOrRecurring([Condition: "Hyponatremia Condition Risk Valuesets"])) C
+  (C3F.Confirmed(C3F.ActiveOrRecurring("Hyponatremia Condition Risk Valuesets"))) C
   return {
     Name:  RF.ConceptText(C.code),
     Status:    C.clinicalStatus.value,
@@ -201,12 +202,9 @@ define "InPopulation":
    "MeetsInclusionCriteria" 
 
 define "Recommendation":
-  if "Low Sodium Concentration" then 'Avoid concurrent if possible
-If combination is used, monitor serum sodium'
-  else if "Not Low Sodium Concentration" and "Yes General Risks" then 'Consider alternative
-If combination is used, monitor serum sodium'
-  else if "Not Low Sodium Concentration" and "No General Risks" and "Yes Hyponatremia Risks" then 'Consider alternative
-If combination is used, monitor serum sodium'
+  if "Low Sodium Concentration" then 'Avoid concurrent if possible. If combination is used, monitor serum sodium'
+  else if "Not Low Sodium Concentration" and "Yes General Risks" then 'Consider alternative. If combination is used, monitor serum sodium'
+  else if "Not Low Sodium Concentration" and "No General Risks" and "Yes Hyponatremia Risks" then 'Consider alternative. If combination is used, monitor serum sodium'
   else if "Not Low Sodium Concentration" and "No Hyponatremia Risks" and "No General Risks" then ''
   else null
 
@@ -249,8 +247,7 @@ define Summary: {
     IsFemale: "General Risk Factor Female"
   },
   RiskFactorsForHyponatremia: {
-    GastrointestinalBleeding: "Report GI Bleeding",
-    MedicationRiskFactors: "Report Hyponatremia Risk Medications",
+    MedicationRiskFactors: "Hyponatremia Risk Drugs",
     ConditionRiskFactors: "Report Hyponatremia Risk Conditions"
   },
   Alert: {
