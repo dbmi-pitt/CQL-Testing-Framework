@@ -103,7 +103,7 @@ define "Sodium Concentration <130 mmol/L":
 define "Report Highest Sodium Concentration":
   (C3F.HighestObservation(C3F.ObservationLookBack([Observation: "Sodium Concentration Lab Measurements VS"], 7 days))) O
   return {
-    Value: C3F.HighestObservation(C3F.ObservationLookBack([Observation: "Sodium Concentration Lab Measurements VS"], 7 days))
+    C3F.HighestObservation(C3F.ObservationLookBack([Observation: "Sodium Concentration Lab Measurements VS"], 7 days))
   }
 
 define "General Risk Factor Age >=65":
@@ -240,14 +240,14 @@ define Summary: {
   HistoricalTreatments: {
     SSRIsSNRIs: "Report SSRIs and SNRIs",
     Thiazides: "Report Thiazide and Thiazide like Diuretics",
-    HighestSodiumConcentration: "Report Highest Sodium Concentration"
+    HighestRecentSodiumConcentration: "Report Highest Sodium Concentration"
   },
   GeneralRiskFactors: {
     Is65orOlder: "General Risk Factor Age >=65",
     IsFemale: "General Risk Factor Female"
   },
   RiskFactorsForHyponatremia: {
-    MedicationRiskFactors: "Hyponatremia Risk Drugs",
+    MedicationRiskFactors: "Report Hyponatremia Risk Drugs",
     ConditionRiskFactors: "Report Hyponatremia Risk Conditions"
   },
   Alert: {

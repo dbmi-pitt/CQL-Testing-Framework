@@ -764,32 +764,29 @@
                "relationship" : [ ],
                "return" : {
                   "expression" : {
-                     "type" : "Tuple",
+                     "type" : "List",
                      "element" : [ {
-                        "name" : "Value",
-                        "value" : {
-                           "name" : "HighestObservation",
+                        "name" : "HighestObservation",
+                        "libraryName" : "C3F",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "name" : "ObservationLookBack",
                            "libraryName" : "C3F",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "name" : "ObservationLookBack",
-                              "libraryName" : "C3F",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "dataType" : "{http://hl7.org/fhir}Observation",
-                                 "codeProperty" : "code",
-                                 "type" : "Retrieve",
-                                 "codes" : {
-                                    "name" : "Sodium Concentration Lab Measurements VS",
-                                    "type" : "ValueSetRef"
-                                 }
-                              }, {
-                                 "value" : 7,
-                                 "unit" : "days",
-                                 "type" : "Quantity"
-                              } ]
+                              "dataType" : "{http://hl7.org/fhir}Observation",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "name" : "Sodium Concentration Lab Measurements VS",
+                                 "type" : "ValueSetRef"
+                              }
+                           }, {
+                              "value" : 7,
+                              "unit" : "days",
+                              "type" : "Quantity"
                            } ]
-                        }
+                        } ]
                      } ]
                   }
                }
@@ -1991,7 +1988,7 @@
                            "type" : "ExpressionRef"
                         }
                      }, {
-                        "name" : "HighestSodiumConcentration",
+                        "name" : "HighestRecentSodiumConcentration",
                         "value" : {
                            "name" : "Report Highest Sodium Concentration",
                            "type" : "ExpressionRef"
@@ -2023,7 +2020,7 @@
                      "element" : [ {
                         "name" : "MedicationRiskFactors",
                         "value" : {
-                           "name" : "Hyponatremia Risk Drugs",
+                           "name" : "Report Hyponatremia Risk Drugs",
                            "type" : "ExpressionRef"
                         }
                      }, {

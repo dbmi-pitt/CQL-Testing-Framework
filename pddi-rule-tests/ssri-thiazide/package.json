@@ -1,5 +1,5 @@
 {
-  "name": "pddi-warfarin-nsaid",
+  "name": "pddi-ssri-thiazide",
   "version": "1.0.0",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec --recursive"
