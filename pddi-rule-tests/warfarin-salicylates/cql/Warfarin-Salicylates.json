@@ -1,5 +1,33 @@
 {
    "library" : {
+      "annotation" : [ {
+         "startLine" : 133,
+         "startChar" : 14,
+         "endLine" : 133,
+         "endChar" : 60,
+         "message" : "Boolean-valued expression was promoted to a list.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 154,
+         "startChar" : 62,
+         "endLine" : 154,
+         "endChar" : 108,
+         "message" : "Boolean-valued expression was promoted to a list.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "startLine" : 162,
+         "startChar" : 62,
+         "endLine" : 162,
+         "endChar" : 108,
+         "message" : "Boolean-valued expression was promoted to a list.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      } ],
       "identifier" : {
          "id" : "Warfarin-Salicylates",
          "version" : "1.0"
@@ -31,6 +59,10 @@
             "localIdentifier" : "RF",
             "path" : "ReusableFunctions_FHIRv300",
             "version" : "1.0.0"
+         }, {
+            "localIdentifier" : "Convert",
+            "path" : "CDS_Connect_Conversions",
+            "version" : "1"
          } ]
       },
       "codeSystems" : {
@@ -365,169 +397,24 @@
             "expression" : {
                "type" : "Query",
                "source" : [ {
-                  "alias" : "M",
-                  "expression" : {
-                     "dataType" : "{http://hl7.org/fhir}Medication",
-                     "codeProperty" : "code",
-                     "type" : "Retrieve",
-                     "codes" : {
-                        "name" : "Non-Acetylated Salicylates VS",
-                        "type" : "ValueSetRef"
-                     }
-                  }
-               } ],
-               "relationship" : [ {
                   "alias" : "S",
-                  "type" : "With",
                   "expression" : {
                      "name" : "Non-Acetylated Salicylates",
                      "type" : "ExpressionRef"
-                  },
-                  "suchThat" : {
-                     "type" : "Equal",
-                     "operand" : [ {
-                        "type" : "Query",
-                        "source" : [ {
-                           "alias" : "$this",
-                           "expression" : {
-                              "type" : "Query",
-                              "source" : [ {
-                                 "alias" : "$this",
-                                 "expression" : {
-                                    "path" : "coding",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "path" : "code",
-                                       "scope" : "M",
-                                       "type" : "Property"
-                                    }
-                                 }
-                              } ],
-                              "where" : {
-                                 "type" : "Not",
-                                 "operand" : {
-                                    "type" : "IsNull",
-                                    "operand" : {
-                                       "path" : "code",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "name" : "$this",
-                                          "type" : "AliasRef"
-                                       }
-                                    }
-                                 }
-                              },
-                              "return" : {
-                                 "expression" : {
-                                    "path" : "code",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "name" : "$this",
-                                       "type" : "AliasRef"
-                                    }
-                                 }
-                              }
-                           }
-                        } ],
-                        "where" : {
-                           "type" : "Not",
-                           "operand" : {
-                              "type" : "IsNull",
-                              "operand" : {
-                                 "path" : "value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "name" : "$this",
-                                    "type" : "AliasRef"
-                                 }
-                              }
-                           }
-                        },
-                        "return" : {
-                           "expression" : {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "$this",
-                                 "type" : "AliasRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "type" : "Query",
-                        "source" : [ {
-                           "alias" : "$this",
-                           "expression" : {
-                              "type" : "Query",
-                              "source" : [ {
-                                 "alias" : "$this",
-                                 "expression" : {
-                                    "path" : "coding",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "path" : "medication",
-                                       "scope" : "S",
-                                       "type" : "Property"
-                                    }
-                                 }
-                              } ],
-                              "where" : {
-                                 "type" : "Not",
-                                 "operand" : {
-                                    "type" : "IsNull",
-                                    "operand" : {
-                                       "path" : "code",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "name" : "$this",
-                                          "type" : "AliasRef"
-                                       }
-                                    }
-                                 }
-                              },
-                              "return" : {
-                                 "expression" : {
-                                    "path" : "code",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "name" : "$this",
-                                       "type" : "AliasRef"
-                                    }
-                                 }
-                              }
-                           }
-                        } ],
-                        "where" : {
-                           "type" : "Not",
-                           "operand" : {
-                              "type" : "IsNull",
-                              "operand" : {
-                                 "path" : "value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "name" : "$this",
-                                    "type" : "AliasRef"
-                                 }
-                              }
-                           }
-                        },
-                        "return" : {
-                           "expression" : {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "$this",
-                                 "type" : "AliasRef"
-                              }
-                           }
-                        }
-                     } ]
                   }
                } ],
+               "relationship" : [ ],
                "return" : {
                   "expression" : {
                      "type" : "Tuple",
                      "element" : [ {
+                        "name" : "Type",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Statement",
+                           "type" : "Literal"
+                        }
+                     }, {
                         "name" : "Name",
                         "value" : {
                            "name" : "ConceptText",
@@ -537,8 +424,8 @@
                               "strict" : false,
                               "type" : "As",
                               "operand" : {
-                                 "path" : "code",
-                                 "scope" : "M",
+                                 "path" : "medication",
+                                 "scope" : "S",
                                  "type" : "Property"
                               },
                               "asTypeSpecifier" : {
@@ -554,15 +441,8 @@
                            "libraryName" : "RF",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "type" : "Indexer",
-                              "operand" : [ {
-                                 "name" : "Non-Acetylated Salicylates",
-                                 "type" : "ExpressionRef"
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "0",
-                                 "type" : "Literal"
-                              } ]
+                              "name" : "S",
+                              "type" : "AliasRef"
                            } ]
                         }
                      }, {
@@ -579,18 +459,8 @@
                                  "type" : "As",
                                  "operand" : {
                                     "path" : "effective",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "type" : "Indexer",
-                                       "operand" : [ {
-                                          "name" : "Non-Acetylated Salicylates",
-                                          "type" : "ExpressionRef"
-                                       }, {
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                          "value" : "0",
-                                          "type" : "Literal"
-                                       } ]
-                                    }
+                                    "scope" : "S",
+                                    "type" : "Property"
                                  },
                                  "asTypeSpecifier" : {
                                     "name" : "{http://hl7.org/fhir}Period",
@@ -606,110 +476,9 @@
                            "type" : "Property",
                            "source" : {
                               "path" : "status",
-                              "type" : "Property",
-                              "source" : {
-                                 "type" : "Indexer",
-                                 "operand" : [ {
-                                    "name" : "Non-Acetylated Salicylates",
-                                    "type" : "ExpressionRef"
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "0",
-                                    "type" : "Literal"
-                                 } ]
-                              }
+                              "scope" : "S",
+                              "type" : "Property"
                            }
-                        }
-                     }, {
-                        "name" : "Ingredient",
-                        "value" : {
-                           "name" : "ConceptText",
-                           "libraryName" : "RF",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "strict" : false,
-                              "type" : "As",
-                              "operand" : {
-                                 "path" : "item",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "type" : "Indexer",
-                                    "operand" : [ {
-                                       "path" : "ingredient",
-                                       "scope" : "M",
-                                       "type" : "Property"
-                                    }, {
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                       "value" : "0",
-                                       "type" : "Literal"
-                                    } ]
-                                 }
-                              },
-                              "asTypeSpecifier" : {
-                                 "name" : "{http://hl7.org/fhir}CodeableConcept",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "Amount",
-                        "value" : {
-                           "type" : "Divide",
-                           "operand" : [ {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "path" : "value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "numerator",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "path" : "amount",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "type" : "Indexer",
-                                          "operand" : [ {
-                                             "path" : "ingredient",
-                                             "scope" : "M",
-                                             "type" : "Property"
-                                          }, {
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                             "value" : "0",
-                                             "type" : "Literal"
-                                          } ]
-                                       }
-                                    }
-                                 }
-                              }
-                           }, {
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "path" : "value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "denominator",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "path" : "amount",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "type" : "Indexer",
-                                          "operand" : [ {
-                                             "path" : "ingredient",
-                                             "scope" : "M",
-                                             "type" : "Property"
-                                          }, {
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                             "value" : "0",
-                                             "type" : "Literal"
-                                          } ]
-                                       }
-                                    }
-                                 }
-                              }
-                           } ]
                         }
                      }, {
                         "name" : "Dosage",
@@ -728,41 +497,9 @@
                                     "source" : {
                                        "type" : "Indexer",
                                        "operand" : [ {
-                                          "type" : "Flatten",
-                                          "operand" : {
-                                             "type" : "Query",
-                                             "source" : [ {
-                                                "alias" : "$this",
-                                                "expression" : {
-                                                   "name" : "Non-Acetylated Salicylates",
-                                                   "type" : "ExpressionRef"
-                                                }
-                                             } ],
-                                             "where" : {
-                                                "type" : "Not",
-                                                "operand" : {
-                                                   "type" : "IsNull",
-                                                   "operand" : {
-                                                      "path" : "dosage",
-                                                      "type" : "Property",
-                                                      "source" : {
-                                                         "name" : "$this",
-                                                         "type" : "AliasRef"
-                                                      }
-                                                   }
-                                                }
-                                             },
-                                             "return" : {
-                                                "expression" : {
-                                                   "path" : "dosage",
-                                                   "type" : "Property",
-                                                   "source" : {
-                                                      "name" : "$this",
-                                                      "type" : "AliasRef"
-                                                   }
-                                                }
-                                             }
-                                          }
+                                          "path" : "dosage",
+                                          "scope" : "S",
+                                          "type" : "Property"
                                        }, {
                                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                           "value" : "0",
@@ -776,59 +513,28 @@
                      }, {
                         "name" : "DailyDosage",
                         "value" : {
-                           "type" : "Multiply",
-                           "operand" : [ {
-                              "type" : "ToDecimal",
-                              "operand" : {
-                                 "path" : "value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "frequency",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "path" : "repeat",
+                           "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "Instance",
+                           "element" : [ {
+                              "name" : "value",
+                              "value" : {
+                                 "type" : "Multiply",
+                                 "operand" : [ {
+                                    "name" : "ToDecimal",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "path" : "value",
                                        "type" : "Property",
                                        "source" : {
-                                          "path" : "timing",
+                                          "path" : "dose",
                                           "type" : "Property",
                                           "source" : {
                                              "type" : "Indexer",
                                              "operand" : [ {
-                                                "type" : "Flatten",
-                                                "operand" : {
-                                                   "type" : "Query",
-                                                   "source" : [ {
-                                                      "alias" : "$this",
-                                                      "expression" : {
-                                                         "name" : "Non-Acetylated Salicylates",
-                                                         "type" : "ExpressionRef"
-                                                      }
-                                                   } ],
-                                                   "where" : {
-                                                      "type" : "Not",
-                                                      "operand" : {
-                                                         "type" : "IsNull",
-                                                         "operand" : {
-                                                            "path" : "dosage",
-                                                            "type" : "Property",
-                                                            "source" : {
-                                                               "name" : "$this",
-                                                               "type" : "AliasRef"
-                                                            }
-                                                         }
-                                                      }
-                                                   },
-                                                   "return" : {
-                                                      "expression" : {
-                                                         "path" : "dosage",
-                                                         "type" : "Property",
-                                                         "source" : {
-                                                            "name" : "$this",
-                                                            "type" : "AliasRef"
-                                                         }
-                                                      }
-                                                   }
-                                                }
+                                                "path" : "dosage",
+                                                "scope" : "S",
+                                                "type" : "Property"
                                              }, {
                                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                                 "value" : "0",
@@ -836,66 +542,46 @@
                                              } ]
                                           }
                                        }
+                                    } ]
+                                 }, {
+                                    "type" : "ToDecimal",
+                                    "operand" : {
+                                       "path" : "value",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "path" : "frequency",
+                                          "type" : "Property",
+                                          "source" : {
+                                             "path" : "repeat",
+                                             "type" : "Property",
+                                             "source" : {
+                                                "path" : "timing",
+                                                "type" : "Property",
+                                                "source" : {
+                                                   "type" : "Indexer",
+                                                   "operand" : [ {
+                                                      "path" : "dosage",
+                                                      "scope" : "S",
+                                                      "type" : "Property"
+                                                   }, {
+                                                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                                      "value" : "0",
+                                                      "type" : "Literal"
+                                                   } ]
+                                                }
+                                             }
+                                          }
+                                       }
                                     }
-                                 }
+                                 } ]
                               }
                            }, {
-                              "type" : "Divide",
-                              "operand" : [ {
-                                 "path" : "value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "value",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "path" : "numerator",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "path" : "amount",
-                                          "type" : "Property",
-                                          "source" : {
-                                             "type" : "Indexer",
-                                             "operand" : [ {
-                                                "path" : "ingredient",
-                                                "scope" : "M",
-                                                "type" : "Property"
-                                             }, {
-                                                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                                "value" : "0",
-                                                "type" : "Literal"
-                                             } ]
-                                          }
-                                       }
-                                    }
-                                 }
-                              }, {
-                                 "path" : "value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "value",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "path" : "denominator",
-                                       "type" : "Property",
-                                       "source" : {
-                                          "path" : "amount",
-                                          "type" : "Property",
-                                          "source" : {
-                                             "type" : "Indexer",
-                                             "operand" : [ {
-                                                "path" : "ingredient",
-                                                "scope" : "M",
-                                                "type" : "Property"
-                                             }, {
-                                                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                                "value" : "0",
-                                                "type" : "Literal"
-                                             } ]
-                                          }
-                                       }
-                                    }
-                                 }
-                              } ]
+                              "name" : "unit",
+                              "value" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "mg/d",
+                                 "type" : "Literal"
+                              }
                            } ]
                         }
                      } ]
@@ -1369,30 +1055,147 @@
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "type" : "Query",
-               "source" : [ {
-                  "alias" : "S",
-                  "expression" : {
-                     "name" : "Report Non-Acetylated Salicylates",
-                     "type" : "ExpressionRef"
-                  }
-               } ],
-               "relationship" : [ ],
-               "where" : {
-                  "type" : "GreaterOrEqual",
-                  "operand" : [ {
-                     "path" : "DailyDosage",
-                     "scope" : "S",
-                     "type" : "Property"
+               "type" : "GreaterOrEqual",
+               "operand" : [ {
+                  "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "value",
+                     "value" : {
+                        "type" : "Multiply",
+                        "operand" : [ {
+                           "name" : "ToDecimal",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "dose",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "type" : "Indexer",
+                                    "operand" : [ {
+                                       "type" : "Flatten",
+                                       "operand" : {
+                                          "type" : "Query",
+                                          "source" : [ {
+                                             "alias" : "$this",
+                                             "expression" : {
+                                                "name" : "Non-Acetylated Salicylates",
+                                                "type" : "ExpressionRef"
+                                             }
+                                          } ],
+                                          "where" : {
+                                             "type" : "Not",
+                                             "operand" : {
+                                                "type" : "IsNull",
+                                                "operand" : {
+                                                   "path" : "dosage",
+                                                   "type" : "Property",
+                                                   "source" : {
+                                                      "name" : "$this",
+                                                      "type" : "AliasRef"
+                                                   }
+                                                }
+                                             }
+                                          },
+                                          "return" : {
+                                             "expression" : {
+                                                "path" : "dosage",
+                                                "type" : "Property",
+                                                "source" : {
+                                                   "name" : "$this",
+                                                   "type" : "AliasRef"
+                                                }
+                                             }
+                                          }
+                                       }
+                                    }, {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "0",
+                                       "type" : "Literal"
+                                    } ]
+                                 }
+                              }
+                           } ]
+                        }, {
+                           "type" : "ToDecimal",
+                           "operand" : {
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "frequency",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "repeat",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "path" : "timing",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "type" : "Indexer",
+                                          "operand" : [ {
+                                             "type" : "Flatten",
+                                             "operand" : {
+                                                "type" : "Query",
+                                                "source" : [ {
+                                                   "alias" : "$this",
+                                                   "expression" : {
+                                                      "name" : "Non-Acetylated Salicylates",
+                                                      "type" : "ExpressionRef"
+                                                   }
+                                                } ],
+                                                "where" : {
+                                                   "type" : "Not",
+                                                   "operand" : {
+                                                      "type" : "IsNull",
+                                                      "operand" : {
+                                                         "path" : "dosage",
+                                                         "type" : "Property",
+                                                         "source" : {
+                                                            "name" : "$this",
+                                                            "type" : "AliasRef"
+                                                         }
+                                                      }
+                                                   }
+                                                },
+                                                "return" : {
+                                                   "expression" : {
+                                                      "path" : "dosage",
+                                                      "type" : "Property",
+                                                      "source" : {
+                                                         "name" : "$this",
+                                                         "type" : "AliasRef"
+                                                      }
+                                                   }
+                                                }
+                                             }
+                                          }, {
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                             "value" : "0",
+                                             "type" : "Literal"
+                                          } ]
+                                       }
+                                    }
+                                 }
+                              }
+                           }
+                        } ]
+                     }
                   }, {
-                     "type" : "ToDecimal",
-                     "operand" : {
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
+                     "name" : "unit",
+                     "value" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "mg/d",
                         "type" : "Literal"
                      }
                   } ]
-               }
+               }, {
+                  "value" : 3,
+                  "unit" : "mg/d",
+                  "type" : "Quantity"
+               } ]
             }
          }, {
             "name" : "Non-Acetylated Salicylate dose < 3 grams/day",
@@ -1403,8 +1206,11 @@
                "operand" : {
                   "type" : "Exists",
                   "operand" : {
-                     "name" : "Non-Acetylated Salicylate dose >= 3 grams/day",
-                     "type" : "ExpressionRef"
+                     "type" : "ToList",
+                     "operand" : {
+                        "name" : "Non-Acetylated Salicylate dose >= 3 grams/day",
+                        "type" : "ExpressionRef"
+                     }
                   }
                }
             }
@@ -1561,8 +1367,11 @@
                               }, {
                                  "type" : "Exists",
                                  "operand" : {
-                                    "name" : "Non-Acetylated Salicylate dose >= 3 grams/day",
-                                    "type" : "ExpressionRef"
+                                    "type" : "ToList",
+                                    "operand" : {
+                                       "name" : "Non-Acetylated Salicylate dose >= 3 grams/day",
+                                       "type" : "ExpressionRef"
+                                    }
                                  }
                               } ]
                            }
@@ -1679,8 +1488,11 @@
                               }, {
                                  "type" : "Exists",
                                  "operand" : {
-                                    "name" : "Non-Acetylated Salicylate dose >= 3 grams/day",
-                                    "type" : "ExpressionRef"
+                                    "type" : "ToList",
+                                    "operand" : {
+                                       "name" : "Non-Acetylated Salicylate dose >= 3 grams/day",
+                                       "type" : "ExpressionRef"
+                                    }
                                  }
                               } ]
                            }

@@ -9,7 +9,7 @@ include CDS_Connect_Commons_for_FHIRv300 version '1.1.0' called C3F
 
 include ReusableFunctions_FHIRv300 version '1.0.0' called RF
 
-include "CDS_Connect_Conversions" version '1' called Convert 
+include "CDS_Connect_Conversions" version '1' called Convert
 
 
 codesystem "RXNORM": 'http://www.nlm.nih.gov/research/umls/rxnorm'
@@ -57,22 +57,17 @@ define "Non-Acetylated Salicylates":
   C3F.MedicationStatementLookBack([MedicationStatement: "Non-Acetylated Salicylates VS"], 180 days)
 
 define "Report Non-Acetylated Salicylates":
-  [Medication: "Non-Acetylated Salicylates VS"] M
-  with "Non-Acetylated Salicylates" S
-    such that M.code.coding.code.value = S.medication.coding.code.value
-      return {
-        Name: RF.ConceptText(M.code as FHIR.CodeableConcept),
-        Start: RF.MedicationStatementDate("Non-Acetylated Salicylates"[0]), // TODO not sure how this will handle multiple 
-        End: RF.DateTimeText(("Non-Acetylated Salicylates"[0].effective as FHIR.Period)."end"),
-        Status: "Non-Acetylated Salicylates"[0].status.value,
-        Ingredient: RF.ConceptText(M.ingredient[0].item as FHIR.CodeableConcept), // TODO deal with potentially more than one ingredient
-        // Numerator: M.ingredient[0].amount.numerator.value.value,
-        // Denominator: M.ingredient[0].amount.denominator.value.value,
-        // Amount: M.ingredient[0].amount.numerator.value.value / M.ingredient[0].amount.denominator.value.value,
-        Dosage: "Non-Acetylated Salicylates".dosage[0].timing.repeat.frequency.value,
-        DailyDosage: System.Quantity { value: [MedicationStatement: "Non-Acetylated Salicylates VS"].dosage[0].dose.value * [MedicationStatement: "Non-Acetylated Salicylates VS"].dosage[0].timing.repeat.frequency.value, unit: 'mg/d' } 
-      }
-      sort by Start desc, End desc
+  "Non-Acetylated Salicylates" S
+  return {
+    Type: 'Statement',
+    Name: RF.ConceptText(S.medication as FHIR.CodeableConcept),
+    Start: RF.MedicationStatementDate(S),
+    End: RF.DateTimeText((S.effective as FHIR.Period)."end"),
+    Status: S.status.value,
+    Dosage: S.dosage[0].timing.repeat.frequency.value,
+    DailyDosage: System.Quantity { value: S.dosage[0].dose.value * S.dosage[0].timing.repeat.frequency.value, unit: 'mg/d' }
+  }
+  sort by Start desc, End desc
 
 define "Aspirins":
   C3F.MedicationStatementLookBack([MedicationStatement: "Salicylates VS"], 180 days)
@@ -132,7 +127,7 @@ define "Warfarin - Non-Acetylated Salicylates":
 
 // BOOLEAN FOR IF ANY HIGH DOSAGE EXISTS
 define "Non-Acetylated Salicylate dose >= 3 grams/day":
-  System.Quantity { value: [MedicationStatement: "Non-Acetylated Salicylates VS"].dosage[0].dose.value * [MedicationStatement: "Non-Acetylated Salicylates VS"].dosage[0].timing.repeat.frequency.value, unit: 'mg/d' } >= 3 'mg/d'
+  System.Quantity { value: "Non-Acetylated Salicylates".dosage[0].dose.value * "Non-Acetylated Salicylates".dosage[0].timing.repeat.frequency.value, unit: 'mg/d' } >= 3 'mg/d'
 
 define "Non-Acetylated Salicylate dose < 3 grams/day":
   not exists("Non-Acetylated Salicylate dose >= 3 grams/day")
